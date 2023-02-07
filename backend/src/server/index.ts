@@ -1,6 +1,7 @@
 import express, {Express, Request, Response} from 'express'
 import rootRouter from '../router/index'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
 dotenv.config()
 
@@ -12,6 +13,9 @@ server.use('/api',
 
 //Static server
 server.use(express.static('public'))
+
+//Mongoose Connection
+mongoose.connect('mongodb://localhost:27017/nocountry')
 
 //Content Type Config
 server.use(express.urlencoded({extended: true, limit: '50mb'}))
