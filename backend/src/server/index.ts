@@ -15,7 +15,7 @@ server.use('/api',
 server.use(express.static('public'))
 
 //Mongoose Connection
-mongoose.connect('mongodb://localhost:27017/nocountry')
+mongoose.connect(`${process.env.SERVER}`)
 
 //Content Type Config
 server.use(express.urlencoded({extended: true, limit: '50mb'}))

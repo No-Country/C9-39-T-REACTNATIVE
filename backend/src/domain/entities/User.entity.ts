@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { Schema } from "mongoose"
 import { IUser } from "../interfaces/IUser.interfaces"
 
 
@@ -13,8 +13,10 @@ export const userEntity = () => {
         status: {type: String, required: true},
         isVerified: {type: Boolean, default: false},
         createdAt: {type: Date, default: Date.now()},
-        updateAt: {type: Date}
+        updateAt: {type: Date},
+        expenses: [{type: Schema.Types.ObjectId, ref: 'discharge'}],
+        income: [{type: Schema.Types.ObjectId, ref: 'income'}]
     })
-
+    
     return mongoose.models.Users || mongoose.model<IUser>('Users', userSchema)
 }
