@@ -38,7 +38,9 @@ export const getUserById = async (id: string): Promise<any | undefined> => {
     try {
         let userModel = userEntity()
 
-        let data = await userModel.findById(id)
+        let data = await userModel.findById(id).populate({
+            path: 'discharge'
+        })
         
         return {success: true, data}
     } catch (error) {

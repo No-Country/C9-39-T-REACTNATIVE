@@ -8,5 +8,7 @@ export interface IUser {
     status: string,
     isVerified: boolean,
     createdAt: Date,
-    updateAt: Date
+    updateAt: Date,
+    expenses: [],
+    income: [],
 }
