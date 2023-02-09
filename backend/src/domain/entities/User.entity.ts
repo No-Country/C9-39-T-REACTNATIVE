@@ -1,9 +1,10 @@
-import mongoose, { Schema } from "mongoose"
+import  { Schema } from "mongoose"
+import * as mongoose from 'mongoose'
 import { IUser } from "../interfaces/IUser.interfaces"
 
 
 export const userEntity = () => {
-    let userSchema = new mongoose.Schema<IUser>({
+    let Userschema = new mongoose.Schema<IUser>({
         firstname: {type: String, required: true},
         lastname: {type: String, required: true},
         email: {type: String, required: true},
@@ -14,9 +15,10 @@ export const userEntity = () => {
         isVerified: {type: Boolean, default: false},
         createdAt: {type: Date, default: Date.now()},
         updateAt: {type: Date},
-        expenses: [{type: Schema.Types.ObjectId, ref: 'discharge'}],
-        income: [{type: Schema.Types.ObjectId, ref: 'income'}]
+        expenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'discharges'}],
+        income: [{type: mongoose.Schema.Types.ObjectId, ref: 'income'}]
     })
     
-    return mongoose.models.Users || mongoose.model<IUser>('Users', userSchema)
+    const Mongomodel = mongoose.models.users|| mongoose.model<IUser>('users', Userschema)
+    return Mongomodel
 }

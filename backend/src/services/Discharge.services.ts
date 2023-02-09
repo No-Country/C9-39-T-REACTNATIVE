@@ -25,12 +25,3 @@ export const createDischarge = async (discharge: any): Promise<any | undefined> 
         return { success: false, error: `Hubo un error ${error}` }
     }
 }
-
-// const assignDischarge = async (userid: string, dischargeId: string): Promise<any | undefined> => {
-//     try {
-//         let dis
-//         const assigned = await 
-//     } catch (error) {
-        
-//     }
-// }

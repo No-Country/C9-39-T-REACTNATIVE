@@ -9,6 +9,6 @@ export interface IUser {
     isVerified: boolean,
     createdAt: Date,
     updateAt: Date,
-    expenses: [],
-    income: [],
+    expenses: string[],
+    income: string[],
 }
