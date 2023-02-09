@@ -2,11 +2,12 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import Input from '../components/shared/Input'
 import SubmitButton from '../components/shared/SubmitButton'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 import { mockFetch } from '../utils'
+import colors from '../constants/colors'
 
 const VerifyEmailCode = ({ navigation }) => {
-  const [email, setEmail] = useState('')
+  const [verificationCode, setverificationCode] = useState('')
   const [loading, setLoading] = useState(false)
 
   const onPress = async () => {
@@ -23,12 +24,26 @@ const VerifyEmailCode = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ textAlign: 'center', color: 'green', fontSize: 20 }}>
-          Imagen
-        </Text>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 20,
+        }}
+      >
+        <MaterialCommunityIcons
+          name='email-fast-outline'
+          size={100}
+          style={styles.icon}
+        />
       </View>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 20,
+        }}
+      >
         <Text style={{ textAlign: 'center', color: 'green', fontSize: 20 }}>
           Insertar código de confirmación
         </Text>
@@ -40,15 +55,11 @@ const VerifyEmailCode = ({ navigation }) => {
         </Text>
       </View>
       <Input
-        id='email'
-        label='Email'
-        value={email}
-        setValue={setEmail}
-        keyboardType='email-address'
+        id='verificationCode'
+        label='Código'
+        value={verificationCode}
+        setValue={setverificationCode}
         autoCapitalize='none'
-        placeholder='email@correo.com'
-        iconPack={AntDesign}
-        icon='mail'
       />
       {loading ? (
         <ActivityIndicator
@@ -76,6 +87,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  icon: {
+    color: 'white',
+    marginRight: 10,
+    backgroundColor: 'green',
+    borderRadius: 15,
+    padding: 15,
   },
 })
 

@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons'
 import { mockFetch } from '../utils'
 
-const ResetPassword = () => {
+const ResetPassword = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [seePassword, setSeePassword] = useState(false)
@@ -18,7 +18,7 @@ const ResetPassword = () => {
     try {
       // request go here
       await mockFetch(1000)
-      navigation.navigate('ResetPassword')
+      navigation.navigate('Signin')
     } catch {
     } finally {
       setLoading(false)

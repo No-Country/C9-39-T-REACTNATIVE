@@ -98,15 +98,15 @@ export default function AppRoutes() {
         ) : (
           <>
             <Stack.Screen
-              name='Signup'
-              component={Signup}
+              name='Signin'
+              component={Signin}
               options={{
                 headerShown: false,
               }}
             />
             <Stack.Screen
-              name='Signin'
-              component={Signin}
+              name='Signup'
+              component={Signup}
               options={{
                 headerShown: false,
               }}
