@@ -22,7 +22,7 @@ export const getAllUser = async (): Promise<any | undefined> => {
 
         let userModel = userEntity()
 
-        let data = await userModel.find({ isDelete: false })
+        let data = await userModel.find({ isDelete: false }).populate('expenses')
 
         return { success: true, data }
     } catch (error) {
@@ -75,9 +75,9 @@ export const deleteUserById = async (id: string): Promise<any | undefined> => {
     try {
         let userModel = userEntity()
 
-        const deleted = await userModel.deleteOne({ _id: id })
+        await userModel.deleteOne({ _id: id })
 
-        return { success: true, deleted }
+        return { success: true, message: 'User deleted successfully' }
     } catch (error) {
         console.log(error)
         return { success: false, message: `Error to delete user ${error}` }

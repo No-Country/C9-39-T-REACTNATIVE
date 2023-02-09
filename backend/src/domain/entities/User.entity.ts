@@ -19,6 +19,6 @@ export const userEntity = () => {
         income: [{type: mongoose.Schema.Types.ObjectId, ref: 'income'}]
     })
     
-    const Mongomodel = mongoose.models.users|| mongoose.model<IUser>('users', Userschema)
-    return Mongomodel
+    
+    return mongoose.models.users|| mongoose.model<IUser>('users', Userschema)
 }

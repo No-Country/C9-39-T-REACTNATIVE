@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose"
 import { IDischarge } from "../interfaces/IDIscharge.interfaces"
 
 export const dischargeEntity = () =>{
-    let dischargeSchema = new mongoose.Schema<IDischarge>({
+    let Dischargeschema = new mongoose.Schema<IDischarge>({
         title: {type: String},
         description: {type: String},
         createAt: {type: Date, default: Date.now()},
@@ -11,6 +11,7 @@ export const dischargeEntity = () =>{
         typeDischarge: [{type: Schema.Types.ObjectId, ref: 'typeDischarge'}]
     })
     
-    const Mongomodel = mongoose.models.discharges|| mongoose.model<IDischarge>('discharges', dischargeSchema)
+    const Mongomodel = mongoose.models.discharges || mongoose.model<IDischarge>('discharges', Dischargeschema)
+
     return Mongomodel
 }
