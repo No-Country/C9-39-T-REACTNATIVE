@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { View, Text, ScrollView, KeyboardAvoidingView, ActivityIndicator, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Feather from "react-native-vector-icons/Feather";
-
-import Input from '../components/shared/Input';
-
-const Signup = () => {
-	const [isLoading, setIsLoading] = useState(false)
-=======
 import { View, Text, ScrollView, KeyboardAvoidingView, ActivityIndicator, StyleSheet, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -75,7 +64,6 @@ const Signup = ({ navigation }) => {
 			setLoading(false);
 		}
 	};
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 
 	return <SafeAreaView style={{ flex: 1 }}>
 		<View style={styles.container}>
@@ -87,43 +75,24 @@ const Signup = ({ navigation }) => {
 					keyboardVerticalOffset={100}>
 
 					<View style={styles.headerTitle}>
-<<<<<<< HEAD
-                        <Text style={styles.title}>Crear Cuenta</Text>
-                    </View>
-=======
 						<Text style={styles.title}>Crear Cuenta</Text>
 					</View>
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 
 					<Input
 						id="firstName"
 						label="Nombre y Apellido"
-<<<<<<< HEAD
-						//icon="user-o"
-						/* onInputChanged={inputChangedHandler} */
-=======
 						value={name}
 						setValue={setName}
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 						autoCapitalize="none" />
 
 					<Input
 						id="email"
 						label="Email"
-<<<<<<< HEAD
-						//icon="mail"
-						//iconPack={Feather}
-						/* onInputChanged={inputChangedHandler} */
-						keyboardType="email-address"
-						autoCapitalize="none"
-						/>
-=======
 						value={email}
 						setValue={setEmail}
 						keyboardType="email-address"
 						autoCapitalize="none"
 					/>
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 
 					<Input
 						id="password"
@@ -132,14 +101,9 @@ const Signup = ({ navigation }) => {
 						autoCapitalize="none"
 						secureTextEntry
 						iconPack={Feather}
-<<<<<<< HEAD
-						/* onInputChanged={inputChangedHandler} */
-						/>
-=======
 						value={password}
 						setValue={setPassword}
 					/>
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 
 					<Input
 						id="password"
@@ -148,22 +112,6 @@ const Signup = ({ navigation }) => {
 						autoCapitalize="none"
 						secureTextEntry
 						iconPack={Feather}
-<<<<<<< HEAD
-						/* onInputChanged={inputChangedHandler} */
-						/>
-
-					{
-						isLoading ?
-							<ActivityIndicator size={'small'} color="green" style={{ marginTop: 10 }} /> :
-							//<SubmitButton
-							//	title="Sign up"
-							//	onPress={authHandler}
-							//	style={{ marginTop: 20 }}
-							//	disabled={!formState.formIsValid} />
-							<Text>Aceptar</Text>
-					}
-
-=======
 						value={confirmPassword}
 						setValue={setConfirmPassword}
 					/>
@@ -192,7 +140,6 @@ const Signup = ({ navigation }) => {
 						</Text>
 					</View>
 
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 				</KeyboardAvoidingView>
 
 			</ScrollView>
@@ -202,25 +149,6 @@ const Signup = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
-<<<<<<< HEAD
-        paddingHorizontal: 20,
-        flex: 1,
-        backgroundColor: 'white'
-    },
-    keyboardAvoidingView: {
-        flex: 1,
-        justifyContent: 'center'
-    },
-	headerTitle: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    title: {
-        fontSize: 20,
-		marginVertical: 14,
-		fontWeight: 'bold'
-    },
-=======
 		paddingHorizontal: 20,
 		flex: 1,
 		backgroundColor: 'white'
@@ -242,7 +170,6 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		letterSpacing: 0.3
 	}
->>>>>>> c09bd32a6069006ccfa5a65725b38f8a8f42040a
 })
 
 export default Signup
