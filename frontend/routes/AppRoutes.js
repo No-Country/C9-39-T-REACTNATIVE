@@ -1,21 +1,22 @@
+import { Text } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Feather from 'react-native-vector-icons/Feather'
 
-import { Text } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Feather from "react-native-vector-icons/Feather";
+import Signup from '../screens/Signup'
+import Signin from '../screens/Signin'
+import Costs from '../screens/Costs'
+import Income from '../screens/Income'
+import ForgotPassword from '../screens/ForgotPassword'
+import VerifyEmailCode from '../screens/VerifyEmailCode'
+import ResetPassword from '../screens/ResetPassword'
 
-import Signup from "../screens/Signup";
-import Signin from "../screens/Signin";
-import Costs from "../screens/Costs";
-import Income from "../screens/Income";
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
@@ -34,7 +35,7 @@ export default function AppRoutes() {
           tabBarStyle: { height: 70 },
           headerRight: () => (
             <Feather
-              name="log-out"
+              name='log-out'
               //onPress={logout}
               size={16}
               style={{ marginHorizontal: 10 }}
@@ -43,49 +44,51 @@ export default function AppRoutes() {
         }}
       >
         <Tab.Screen
-          name="Gastos"
+          name='Gastos'
           component={Costs}
           options={{
             tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? "#433362" : color }}>Gastos</Text>
+              <Text style={{ color: focused ? '#433362' : color }}>Gastos</Text>
             ),
             tabBarIcon: ({ focused, color, size }) => (
               <Feather
-                name={focused ? "database" : "minimize"}
+                name={focused ? 'database' : 'minimize'}
                 size={size}
-                color={focused ? "#433362" : color}
+                color={focused ? '#433362' : color}
               />
             ),
           }}
         />
 
         <Tab.Screen
-          name="Ingresos"
+          name='Ingresos'
           component={Income}
           options={{
             tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? "#433362" : color }}>Ingresos</Text>
+              <Text style={{ color: focused ? '#433362' : color }}>
+                Ingresos
+              </Text>
             ),
             tabBarIcon: ({ focused, color, size }) => (
               <Feather
-                name={focused ? "plus-circle" : "minimize"}
+                name={focused ? 'plus-circle' : 'minimize'}
                 size={size}
-                color={focused ? "#433362" : color}
+                color={focused ? '#433362' : color}
               />
             ),
           }}
         />
       </Tab.Navigator>
-    );
-  };
+    )
+  }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName='Home'>
         {authenticated ? (
           <>
             <Stack.Screen
-              name="Home"
+              name='Home'
               component={Home}
               options={{
                 headerShown: false,
@@ -95,15 +98,36 @@ export default function AppRoutes() {
         ) : (
           <>
             <Stack.Screen
-              name="Signup"
+              name='Signin'
+              component={Signin}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='Signup'
               component={Signup}
               options={{
                 headerShown: false,
               }}
             />
             <Stack.Screen
-              name="Signin"
-              component={Signin}
+              name='ForgotPassword'
+              component={ForgotPassword}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='ResetPassword'
+              component={ResetPassword}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name='VerifyEmailCode'
+              component={VerifyEmailCode}
               options={{
                 headerShown: false,
               }}
@@ -112,5 +136,5 @@ export default function AppRoutes() {
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
