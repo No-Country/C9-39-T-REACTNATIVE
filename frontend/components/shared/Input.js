@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from "react-native"
+import colors from "../../constants/colors";
 
 const Input = props => {
 
@@ -11,8 +12,8 @@ const Input = props => {
             <TextInput
                 { ...props }
                 style={styles.input}
-                //onChangeText={onChangeText}
-                //value={value}
+                value={props.value}
+            	onChangeText={(text) => props.setValue(text)}
 				/>
 
 			{
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
 		borderWidth: 1,
-		borderColor: 'grey',
+		borderColor: colors.textGrey,
 		marginBottom: 10
     },
     icon: {
-        color: 'grey',
+        color: colors.textGrey,
 		marginRight: 10,
     },
     input: {
