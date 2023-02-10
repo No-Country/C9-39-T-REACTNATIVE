@@ -1,5 +1,6 @@
 import express from 'express'
 import authRouter from './Auth.routes'
+import categoryRouter from './Category.routes'
 import dischargeRouter from './Discharge.routes'
 import userRouter from './User.routes'
 
@@ -16,5 +17,7 @@ server.use('/users', userRouter)
 server.use('/auth', authRouter)
 // Discharge routes
 server.use('/discharge', dischargeRouter)
+//Category routes
+server.use('/category', categoryRouter)
 
 export default server
