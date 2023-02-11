@@ -1,6 +1,7 @@
 export default {
     primary: "#198E6B",
     primaryLight: "#6FDDA7",
+    primaryExtraLight: "#A3F3C4",
 
     secondary: '#20C8D8',
     secondaryLight: "#53E6E7",

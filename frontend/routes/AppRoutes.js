@@ -3,14 +3,16 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from 'react-native-vector-icons/Feather'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 import Signup from '../screens/Signup'
 import Signin from '../screens/Signin'
-import Costs from '../screens/Costs'
+import HomeScreen from '../screens/HomeScreen'
 import Income from '../screens/Income'
 import ForgotPassword from '../screens/ForgotPassword'
 import VerifyEmailCode from '../screens/VerifyEmailCode'
 import ResetPassword from '../screens/ResetPassword'
+import colors from '../constants/colors'
 
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,7 +23,7 @@ const Tab = createBottomTabNavigator()
 export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
-  const authenticated = false
+  const authenticated = true
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
@@ -32,30 +34,21 @@ export default function AppRoutes() {
     return (
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: { height: 70 },
-          headerRight: () => (
-            <Feather
-              name='log-out'
-              //onPress={logout}
-              size={16}
-              style={{ marginHorizontal: 10 }}
-            />
-          ),
+          tabBarShowLabel: false,
+          headerShown: false
         }}
       >
         <Tab.Screen
-          name='Gastos'
-          component={Costs}
+          name='Inicio'
+          component={HomeScreen}
           options={{
-            tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? '#433362' : color }}>Gastos</Text>
-            ),
             tabBarIcon: ({ focused, color, size }) => (
-              <Feather
-                name={focused ? 'database' : 'minimize'}
+              <Entypo
+                name={'home'}
                 size={size}
-                color={focused ? '#433362' : color}
-              />
+                color={focused ? colors.primary : color}
+              /> 
+              
             ),
           }}
         />
@@ -64,16 +57,11 @@ export default function AppRoutes() {
           name='Ingresos'
           component={Income}
           options={{
-            tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? '#433362' : color }}>
-                Ingresos
-              </Text>
-            ),
             tabBarIcon: ({ focused, color, size }) => (
               <Feather
-                name={focused ? 'plus-circle' : 'minimize'}
+                name={'user'}
                 size={size}
-                color={focused ? '#433362' : color}
+                color={focused ? colors.primary : color}
               />
             ),
           }}

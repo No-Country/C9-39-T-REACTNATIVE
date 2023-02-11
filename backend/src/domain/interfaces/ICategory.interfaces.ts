@@ -1,4 +1,4 @@
-export interface ITypeDischarge{
+export interface ICategory{
     name: string,
     description: string
 }

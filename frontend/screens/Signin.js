@@ -62,7 +62,7 @@ const Signin = ({ navigation }) => {
         </View>
         <View style={styles.viewText}>
           <Text>No tienes una cuenta?</Text>
-          <Text onPress={() => navigation.navigate('SignUp')}>Crear</Text>
+          <Text onPress={() => navigation.navigate('Signup')}>Crear</Text>
         </View>
       </View>
     </SafeAreaView>
