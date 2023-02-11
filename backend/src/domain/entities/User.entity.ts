@@ -4,7 +4,7 @@ import { IUser } from "../interfaces/IUser.interfaces"
 
 
 export const userEntity = () => {
-    let Userschema = new mongoose.Schema<IUser>({
+    let userSchema = new mongoose.Schema<IUser>({
         firstname: {type: String, required: true},
         lastname: {type: String, required: true},
         email: {type: String, required: true},
@@ -20,5 +20,5 @@ export const userEntity = () => {
     })
     
     
-    return mongoose.models.users || mongoose.model<IUser>('users', Userschema)
+    return mongoose.models.users || mongoose.model<IUser>('users', userSchema)
 }

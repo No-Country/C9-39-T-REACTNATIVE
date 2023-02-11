@@ -9,5 +9,6 @@ const jsonParser = bodyParser.json()
 
 
 categoryRouter.post('/', jsonParser, CategoryController.createCategory)
+categoryRouter.get('/', CategoryController.getAllCategory)
 
 export default categoryRouter
