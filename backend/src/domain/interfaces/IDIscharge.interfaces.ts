@@ -3,6 +3,6 @@ export interface IDischarge{
     description: string,
     createAt: Date,
     amount: number,
-    userId: [],
-    typeDischarge: [],
+    userId: string[],
+    category: string[],
 }
