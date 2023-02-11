@@ -20,5 +20,5 @@ export const userEntity = () => {
     })
     
     
-    return mongoose.models.users|| mongoose.model<IUser>('users', Userschema)
+    return mongoose.models.users || mongoose.model<IUser>('users', Userschema)
 }
