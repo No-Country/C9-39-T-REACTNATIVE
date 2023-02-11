@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Costs = () => {
+const PendingPayments = () => {
   return (
 	<View>
-	  <Text>Costs</Text>
+	  <Text>PendingPayments</Text>
 	</View>
   )
 }
 
-export default Costs
+export default PendingPayments
