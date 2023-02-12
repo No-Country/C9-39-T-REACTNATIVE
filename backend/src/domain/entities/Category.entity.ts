@@ -4,10 +4,10 @@ import { ICategory } from "../interfaces/ICategory.interfaces"
 
 
 export const categoryEntity = () => {
-    let Categoryschema = new mongoose.Schema<ICategory>({
+    let categoruSchema = new mongoose.Schema<ICategory>({
         name: {type: String, required: true},
         description: {type: String, required: true}
     })
     
-    return mongoose.models.category || mongoose.model<ICategory>('category', Categoryschema)
+    return mongoose.models.category || mongoose.model<ICategory>('category', categoruSchema)
 }

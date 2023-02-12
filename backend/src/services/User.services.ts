@@ -22,7 +22,7 @@ export const getAllUser = async (): Promise<any | undefined> => {
 
         let userModel = userEntity()
 
-        let data = await userModel.find({ isDelete: false }).populate('expenses')
+        let data = await userModel.find().populate('expenses')
 
         return { success: true, data }
     } catch (error) {

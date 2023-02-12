@@ -14,3 +14,18 @@ export const createCategory = async (category: any) => {
         return { success: false, message: 'Error to create a new category'}
     }
 }
+
+export const getAllCategoty = async () => {
+
+    try {
+        const categoryModel = categoryEntity()
+
+        const data = await categoryModel.find()
+
+        return {success: true, data}
+
+    } catch (error) {
+        console.log(error)
+        return { success: false, message: 'Error to get all category'}
+    }
+}

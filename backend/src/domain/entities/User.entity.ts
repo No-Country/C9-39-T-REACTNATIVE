@@ -4,7 +4,7 @@ import { IUser } from "../interfaces/IUser.interfaces"
 
 
 export const userEntity = () => {
-    let Userschema = new mongoose.Schema<IUser>({
+    let userSchema = new mongoose.Schema<IUser>({
         firstname: {type: String, required: true},
         lastname: {type: String, required: true},
         email: {type: String, required: true},
@@ -15,10 +15,11 @@ export const userEntity = () => {
         isVerified: {type: Boolean, default: false},
         createdAt: {type: Date, default: Date.now()},
         updateAt: {type: Date},
+        codeVerification: {type: Number, default: 0},
         expenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'discharges'}],
         income: [{type: mongoose.Schema.Types.ObjectId, ref: 'income'}]
     })
     
     
-    return mongoose.models.users || mongoose.model<IUser>('users', Userschema)
+    return mongoose.models.users || mongoose.model<IUser>('users', userSchema)
 }
