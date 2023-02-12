@@ -15,6 +15,7 @@ export const userEntity = () => {
         isVerified: {type: Boolean, default: false},
         createdAt: {type: Date, default: Date.now()},
         updateAt: {type: Date},
+        codeVerification: {type: Number, default: 0},
         expenses: [{type: mongoose.Schema.Types.ObjectId, ref: 'discharges'}],
         income: [{type: mongoose.Schema.Types.ObjectId, ref: 'income'}]
     })
