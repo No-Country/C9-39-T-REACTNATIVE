@@ -1,20 +1,22 @@
 import { userEntity } from "../domain/entities/User.entity"
 import mongoose from "mongoose"
 import { getUserById } from "./User.services"
-import Discharge from '../domain/entities/Discharge.entity'
+import { dischargEntity } from "../domain/entities/Discharge.entity"
+
 
 export const createDischarge = async (discharge: any): Promise<any | undefined> => {
 
 
     try {
-        
+        let dischargeModel = dischargEntity()
         let userModel = userEntity()
-        let newDischarge = new Discharge(discharge)
+
+        let newDischarge = new dischargeModel(discharge)
         // Find user by ID
         const user = await userModel.findById(discharge.userId)
 
         // Create a new discharge
-        const created = await Discharge.create(newDischarge)
+        const created = await dischargeModel.create(newDischarge)
 
         // assign the expense id to the user
         user.expenses = user.expenses.concat(created._id)
@@ -30,39 +32,42 @@ export const createDischarge = async (discharge: any): Promise<any | undefined> 
 export const getAllDischarges = async (): Promise<any | undefined> => {
 
     try {
+        let dischargeModel = dischargEntity()
 
-        const data = await Discharge.find({ isDelete: false }).populate({path: 'userId category', select: 'firstname _id name'})
+        const data = await dischargeModel.find({ isDelete: false }).populate({ path: 'userId category', select: 'firstname _id name' })
 
         return { success: true, data }
     } catch (error) {
         console.log(error)
-        return { success: false, message: 'Error to get all discharges'}
+        return { success: false, message: 'Error to get all discharges' }
     }
 }
 
 export const getDischargeById = async (id: string): Promise<any | undefined> => {
 
     try {
+        let dischargeModel = dischargEntity()
 
-        const data = await Discharge.findById(id).populate({path: 'userId typeDischarge', select: 'firstname _id name'})
+        const data = await dischargeModel.findById(id).populate({ path: 'userId typeDischarge', select: 'firstname _id name' })
 
         return { success: true, data }
     } catch (error) {
         console.log(error)
-        return { success: false, message: 'Error to get discharges by ID'}
+        return { success: false, message: 'Error to get discharges by ID' }
     }
 }
 
 export const updateDischargeById = async (id: string, data: any): Promise<any | undefined> => {
     try {
+        let dischargeModel = dischargEntity()
 
         const discharge = await getDischargeById(id)
 
-        if(!discharge){
+        if (!discharge) {
             throw new Error('Discharge not found')
         }
 
-        const updated = await Discharge.findByIdAndUpdate(id, data)
+        const updated = await dischargeModel.findByIdAndUpdate(id, data)
 
         return { success: true, updated }
 
@@ -76,10 +81,11 @@ export const updateDischargeById = async (id: string, data: any): Promise<any | 
 export const deleteDischargeById = async (id: string): Promise<any | undefined> => {
 
     try {
+        let dischargeModel = dischargEntity()
 
-        await Discharge.deleteOne({_id: id})
+        await dischargeModel.deleteOne({ _id: id })
 
-        return {success: true, message: 'Discharge deleted successfully'}
+        return { success: true, message: 'Discharge deleted successfully' }
     } catch (error) {
         console.log(error)
 

@@ -10,7 +10,6 @@ const HomeScreen = () => {
 	<SafeAreaView style={{ flex: 1 }}>
 		<ScrollView>
 			<View style={styles.container}>
-				
 					<CardTotal />
 
 					<Text 
