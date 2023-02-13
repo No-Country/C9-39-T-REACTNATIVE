@@ -8,22 +8,23 @@ import DetailsInfo from '../components/home/DetailsInfo'
 const HomeScreen = () => {
   return (
 	<SafeAreaView style={{ flex: 1 }}>
-		<View style={styles.container}>
-			<ScrollView>
-				<CardTotal />
-
-				<Text 
-					style={{ marginTop: 20, fontWeight: 'bold', fontSize: 16 }}
-				>
-					Datos Estadisticas
-				</Text>
+		<ScrollView>
+			<View style={styles.container}>
 				
-				<MainHome />
+					<CardTotal />
 
-				<DetailsInfo />
+					<Text 
+						style={{ marginTop: 20, fontWeight: 'bold', fontSize: 16 }}
+					>
+						Datos Estadisticas
+					</Text>
+					
+					<MainHome />
 
-			</ScrollView>
-		</View>
+					<DetailsInfo />
+
+			</View>
+		</ScrollView>
 	</SafeAreaView>
   )
 }

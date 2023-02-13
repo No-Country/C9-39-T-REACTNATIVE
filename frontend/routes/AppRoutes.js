@@ -35,7 +35,6 @@ export default function AppRoutes() {
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          headerShown: false
         }}
       >
         <Tab.Screen
@@ -48,7 +47,6 @@ export default function AppRoutes() {
                 size={size}
                 color={focused ? colors.primary : color}
               /> 
-              
             ),
           }}
         />
@@ -80,7 +78,7 @@ export default function AppRoutes() {
               component={Home}
               options={{
                 headerShown: false,
-              }}
+              }} 
             />
           </>
         ) : (
