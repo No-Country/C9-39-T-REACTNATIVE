@@ -11,6 +11,20 @@ import {
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
   const [password, onChangePassword] = React.useState('')
+
+
+    const submitLogin = async () => {
+      if (!email || !password){
+        Alert.alert('Por favor ingresa tu email y contraseña')
+        return
+      }
+      const { data } = await axios.post(`${API}/auth/login`,{
+        email,password
+      })
+      console.log(data)
+  }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -42,7 +56,7 @@ const Signin = ({ navigation }) => {
           <Button
             title='Iniciar Sesión'
             color='#198E6B'
-            onPress={() => Alert.alert('Iniciaste Sesión')}
+            onPress={() => submitLogin}
           />
         </View>
         <Text style={styles.viewText}>Conectar con</Text>
