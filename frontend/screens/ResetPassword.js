@@ -1,28 +1,59 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Input from '../components/shared/Input'
 import SubmitButton from '../components/shared/SubmitButton'
 import { AntDesign } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons'
 import { mockFetch } from '../utils'
+import axios from 'axios'
+import { API } from '../config'
 
-const ResetPassword = ({ navigation }) => {
+const ResetPassword = ({ route, navigation }) => {
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [seePassword, setSeePassword] = useState(false)
   const [seeRepeatPassword, setSeeRepeatPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const { id } = route.params;
+
   const onPress = async () => {
-    setLoading(true)
     try {
-      // request go here
+      setLoading(true)
+
+      if (!password || !repeatPassword) {
+				Alert.alert('Error', 'Debes completar todos los campos', [
+					{text: 'Aceptar'},
+				]);
+				setLoading(false)
+				return
+			}
+
+      if (password !== repeatPassword) {
+				Alert.alert('Error', 'Las contraseñas no coinciden', [
+					{text: 'Aceptar'},
+				]);
+				setLoading(false)
+				return
+			}
+
+      const { data } = await axios.post(`${API}/auth/resetpassword`, {
+				id, 
+        password
+			})
+
+			// BORRAR LUEGO
+			console.log(data);
+
       await mockFetch(1000)
       navigation.navigate('Signin')
-    } catch {
-    } finally {
-      setLoading(false)
-    }
+    } catch (error) {
+      console.log(error);
+			Alert.alert('Error', 'Hubo un error al verificar codigo', [
+				{text: 'Aceptar'},
+			]);
+			setLoading(false);
+		}
   }
 
   return (
