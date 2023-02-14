@@ -28,10 +28,6 @@ export class AuthController {
 
         const validated = await validateEmail(token)
         res.redirect('http://localhost:8000/api')
-        res.status(200).send({
-            success: true,
-            validated
-        })
     }
 
     static async sendResetPassword(req: Request, res: Response) {
