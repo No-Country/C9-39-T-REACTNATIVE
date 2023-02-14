@@ -58,6 +58,7 @@ const Signup = ({ navigation }) => {
 			navigation.navigate("Signin");
 
 		} catch (error) {
+			console.log(error);
 			Alert.alert('Error', 'Hubo un error al registrarse', [
 				{text: 'Aceptar'},
 			]);

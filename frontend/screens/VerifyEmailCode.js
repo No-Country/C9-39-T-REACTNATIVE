@@ -1,25 +1,50 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Input from '../components/shared/Input'
 import SubmitButton from '../components/shared/SubmitButton'
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 import { mockFetch } from '../utils'
 import colors from '../constants/colors'
+import axios from 'axios'
+import { API } from '../config'
 
-const VerifyEmailCode = ({ navigation }) => {
+const VerifyEmailCode = ({ route, navigation }) => {
   const [verificationCode, setverificationCode] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const { id } = route.params;
+
   const onPress = async () => {
-    setLoading(true)
     try {
-      // request go here
+      setLoading(true)
+
+      if (!verificationCode) {
+				Alert.alert('Error', 'Debes completar el codigo', [
+					{text: 'Aceptar'},
+				]);
+				setLoading(false)
+				return
+			}
+
+      const { data } = await axios.post(`${API}/auth/codeverification`, {
+				id, 
+        code: verificationCode
+			})
+
+			// BORRAR LUEGO
+			console.log(data);
+
       await mockFetch(1000)
-      navigation.navigate('ResetPassword')
-    } catch {
-    } finally {
-      setLoading(false)
-    }
+      navigation.navigate('ResetPassword', {
+        id
+      })
+    } catch (error) {
+      console.log(error);
+			Alert.alert('Error', 'Hubo un error al verificar codigo', [
+				{text: 'Aceptar'},
+			]);
+			setLoading(false);
+		}
   }
 
   return (
