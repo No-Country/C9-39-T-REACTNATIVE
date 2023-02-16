@@ -20,7 +20,7 @@ const Expense = () => {
 			>
 				Aun no agregaste ningun gasto
 			</Text>
-			<TransparentButton title="Agregar" />
+			{/* <TransparentButton title="Agregar" /> */}
 		</View>
 	)
 }

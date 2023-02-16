@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator()
 export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
-  const authenticated = false
+  const authenticated = true
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
@@ -35,7 +35,9 @@ export default function AppRoutes() {
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          headerShown: false
+          //headerShown: false,
+          headerTitle: "",
+          headerStatusBarHeight: 0,
         }}
       >
         <Tab.Screen
@@ -47,8 +49,8 @@ export default function AppRoutes() {
                 name={'home'}
                 size={size}
                 color={focused ? colors.primary : color}
-              /> 
-              
+              />
+
             ),
           }}
         />
