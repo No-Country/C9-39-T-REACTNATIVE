@@ -4,9 +4,5 @@ export interface IDischarge{
     createAt: Date,
     amount: number,
     userId: string[],
-<<<<<<< HEAD
-    typeDischarge: string[],
-=======
     category: string[],
->>>>>>> 32340b1e54eeb340dfd86f8936ecad9c7ea42688
 }
