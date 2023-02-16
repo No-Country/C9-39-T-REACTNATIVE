@@ -7,6 +7,8 @@ import {
   Alert,
   TextInput,
 } from 'react-native'
+import axios from 'axios'
+import { API } from '../config'
 
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
@@ -56,7 +58,7 @@ const Signin = ({ navigation }) => {
           <Button
             title='Iniciar Sesión'
             color='#198E6B'
-            onPress={() => submitLogin}
+            onPress={submitLogin}
           />
         </View>
         <Text style={styles.viewText}>Conectar con</Text>

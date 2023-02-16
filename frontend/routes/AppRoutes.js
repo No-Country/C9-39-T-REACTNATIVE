@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator()
 export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
-  const authenticated = true
+  const authenticated = false
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
