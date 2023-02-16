@@ -33,24 +33,51 @@ const mockData = [
 ]
 
 const RenderItem = ({ item }) => (
-  <View style={{ padding: 16 }}>
-    <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
-    <Text>{item.description}</Text>
-    <Text>{item.createdAt.toLocaleDateString()}</Text>
-    <Text> - ${item.amount}</Text>
-    <Text>Categoría: {item.category.join(', ')}</Text>
+  <View
+    style={{
+      padding: 16,
+      borderColor: 'lightgray',
+      borderRadius: 10,
+      borderWidth: 2,
+      padding: 10,
+      marginBottom: 15,
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+    }}
+  >
+    <View style={{ justifyContent: 'center' }}>
+      <Text>{item.category.join(', ')}</Text>
+    </View>
+    <View style={{ justifyContent: 'center' }}>
+      <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+      <Text>{item.description}</Text>
+
+      <Text>{item.createdAt.toLocaleDateString()}</Text>
+    </View>
+    <View style={{ justifyContent: 'center' }}>
+      <Text
+        style={{
+          fontSize: 18,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          color: colors.primary,
+        }}
+      >
+        - $ {item.amount}
+      </Text>
+    </View>
   </View>
 )
 
 const Expense = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState(mockData)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://gringotts-henna.vercel.app/api/discharge'
-        )
-        const json = await response.json()
+        //const response = await fetch(
+        //  'https://gringotts-henna.vercel.app/api/discharge'
+        //)
+        //const json = await response.json()
         //setData(json.data)
         setData(mockData)
       } catch (error) {
@@ -71,9 +98,27 @@ const Expense = () => {
 const TotalGastos = ({ data }) => {
   const totalAmount = data.reduce((total, item) => total + item.amount, 0)
   return (
-    <Text style={{ fontSize: 18, float: 'right', color: colors.primary }}>
-      {totalAmount}
-    </Text>
+    <View
+      style={{
+        fontSize: 18,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flex: 1,
+        textAlign: 'left',
+        marginBottom: 20,
+      }}
+    >
+      <View>
+        <Text style={{ justifyContent: 'flex-end', textAlign: 'right' }}>
+          Total:
+        </Text>
+        <Text
+          style={{ fontSize: 18, color: colors.primary, textAlign: 'right' }}
+        >
+          $ {totalAmount}
+        </Text>
+      </View>
+    </View>
   )
 }
 
@@ -103,24 +148,35 @@ const Empty = () => {
 
 const Expenses = ({ data }) => {
   return (
-    <>
-      <Text style={{ float: 'right' }}>Total:</Text>
-      <View>
-        <TotalGastos data={data} />
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: '100%',
+      }}
+    >
+      <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <Text style={{ flex: 1 }}>Por fecha</Text>
+        <TotalGastos
+          style={{ fontSize: 18, alignContent: 'left' }}
+          data={data}
+        />
       </View>
       {data.map((item) => {
         return <RenderItem item={item} key={item.createdAt.toISOString()} />
       })}
-    </>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 15,
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // marginTop: 15,
   },
   circle: {
     display: 'flex',
