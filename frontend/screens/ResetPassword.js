@@ -36,8 +36,9 @@ const ResetPassword = ({ route, navigation }) => {
 				setLoading(false)
 				return
 			}
-
-      const { data } = await axios.post(`${API}/auth/resetpassword`, {
+      console.log(id);
+      console.log(password);
+      const { data } = await axios.patch(`${API}/auth/resetpassword`, {
 				id, 
         password
 			})

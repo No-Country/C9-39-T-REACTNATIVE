@@ -39,6 +39,8 @@ const ForgotPassword = ({ navigation }) => {
 				return
 			}
 
+      setLoading(false)
+
       await mockFetch(1000)
       navigation.navigate('VerifyEmailCode', {
         id: data.id

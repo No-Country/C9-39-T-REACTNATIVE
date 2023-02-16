@@ -1,38 +1,63 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CardTotal from '../components/home/CardTotal'
 import MainHome from '../components/home/MainHome'
 import DetailsInfo from '../components/home/DetailsInfo'
+import TransparentButton from '../components/shared/TransparentButton'
+import AddExpensesIncome from '../components/home/AddExpensesIncome'
 
 const HomeScreen = () => {
-  return (
-	<SafeAreaView style={{ flex: 1 }}>
-		<ScrollView>
-			<View style={styles.container}>
-					<CardTotal />
+	const [addExpensesIncome, setAddExpensesIncome] = useState(false)
 
-					<Text 
-						style={{ marginTop: 20, fontWeight: 'bold', fontSize: 16 }}
-					>
-						Datos Estadisticas
-					</Text>
-					
-					<MainHome />
+	return (
+		<SafeAreaView style={{ flex: 1 }}>
+			<ScrollView>
+				<View style={styles.container}>
+					{
+						addExpensesIncome ? (
+							<AddExpensesIncome
+								addExpensesIncome={addExpensesIncome}
+								setAddExpensesIncome={setAddExpensesIncome}
+							/>
+						) : (
+							<>
+								<CardTotal />
 
-					<DetailsInfo />
+								<Text
+									style={{ marginTop: 20, fontWeight: 'bold', fontSize: 16 }}
+								>
+									Datos Estadisticas
+								</Text>
 
-			</View>
-		</ScrollView>
-	</SafeAreaView>
-  )
+								<MainHome />
+
+								<DetailsInfo />
+
+								<View style={styles.containerButtonAdd}>
+									<TransparentButton title="Agregar" onPress={() => setAddExpensesIncome(true)} />
+								</View>
+							</>
+						)
+					}
+				</View>
+			</ScrollView>
+		</SafeAreaView >
+	)
 }
 
 const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 20,
 		flex: 1,
-		backgroundColor: 'white'
+		backgroundColor: 'white',
+		paddingTop: 20
+	},
+	containerButtonAdd: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 })
 

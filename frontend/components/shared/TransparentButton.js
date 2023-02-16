@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-		backgroundColor: 'transparent',
-		marginTop: 40,
-		borderWidth: 1,
-		borderColor: colors.primary
+        backgroundColor: 'transparent',
+        marginBottom: 20,
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: colors.primary
     }
 });
 
