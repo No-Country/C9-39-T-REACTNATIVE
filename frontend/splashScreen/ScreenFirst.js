@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         height: 200
     },
     txtStyle:{
+        font: 'Poppins',
         color: '#fff',
         fontSize: 20,
     }
