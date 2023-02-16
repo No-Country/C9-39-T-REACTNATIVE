@@ -57,7 +57,7 @@ const RenderItem = ({ item }) => (
     <View style={{ justifyContent: 'center' }}>
       <Text
         style={{
-          fontSize: 18,
+          fontSize: 22,
           display: 'flex',
           justifyContent: 'flex-end',
           color: colors.primary,
@@ -71,20 +71,22 @@ const RenderItem = ({ item }) => (
 
 const Expense = () => {
   const [data, setData] = useState(mockData)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        //const response = await fetch(
-        //  'https://gringotts-henna.vercel.app/api/discharge'
-        //)
-        //const json = await response.json()
-        //setData(json.data)
-        setData(mockData)
-      } catch (error) {
-        console.error(error)
-      }
+  console.log(data)
+  const RetrieveData = async () => {
+    try {
+      const response = await fetch(
+        'https://gringotts-henna.vercel.app/api/discharge'
+      )
+      const data = await response.json()
+      //setData(data)
+      setData(mockData)
+      console.log(data)
+    } catch (error) {
+      console.error(error)
     }
-    fetchData()
+  }
+  useEffect(() => {
+    RetrieveData()
   }, [])
 
   return (
@@ -99,6 +101,7 @@ const TotalGastos = ({ data }) => {
   const totalAmount = data.reduce((total, item) => total + item.amount, 0)
   return (
     <View
+      elevation={5}
       style={{
         fontSize: 18,
         display: 'flex',
@@ -106,6 +109,13 @@ const TotalGastos = ({ data }) => {
         flex: 1,
         textAlign: 'left',
         marginBottom: 20,
+        shadowColor: '#000000',
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        shadowOffset: {
+          height: 1,
+          width: 1,
+        },
       }}
     >
       <View>
@@ -113,7 +123,12 @@ const TotalGastos = ({ data }) => {
           Total:
         </Text>
         <Text
-          style={{ fontSize: 18, color: colors.primary, textAlign: 'right' }}
+          style={{
+            fontSize: 18,
+            color: colors.primary,
+            textAlign: 'right',
+            fontSize: 22,
+          }}
         >
           $ {totalAmount}
         </Text>
@@ -173,10 +188,10 @@ const Expenses = ({ data }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // marginTop: 15,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
   },
   circle: {
     display: 'flex',
