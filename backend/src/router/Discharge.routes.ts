@@ -12,6 +12,8 @@ dischargeRouter.post('/', jsonParser, DischargeController.createDischarge)
 dischargeRouter.get('/', DischargeController.getAllDischarges)
 //Get discharge by ID
 dischargeRouter.get('/id', jsonParser, DischargeController.getDischargeById)
+//Get discharge by name
+dischargeRouter.get('/name', jsonParser, DischargeController.getDischargeByName)
 //Update discharge by ID
 dischargeRouter.patch('/', jsonParser, DischargeController.updateDischarge)
 //Delete discharge by ID

@@ -1,10 +1,10 @@
-import { categoryEntity } from "../domain/entities/Category.entity"
+import { Category } from "../domain/entities/Category.entity"
 
 
 export const createCategory = async (category: any) => {
 
     try {
-        const categoryModel = categoryEntity()
+        const categoryModel = Category
 
         const created = await categoryModel.create(category)
 
@@ -18,7 +18,7 @@ export const createCategory = async (category: any) => {
 export const getAllCategoty = async () => {
 
     try {
-        const categoryModel = categoryEntity()
+        const categoryModel = Category
 
         const data = await categoryModel.find()
 

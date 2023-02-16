@@ -1,5 +1,5 @@
 import bcrypt, { genSalt, hash } from "bcrypt"
-import { userEntity } from "../domain/entities/User.entity"
+import { Users } from "../domain/entities/User.entity"
 import { createUser } from "./User.services"
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -16,7 +16,7 @@ let secret = process.env.SECRET
 export const registerUser = async (firstname: string, lastname: string, email: string, password: string, phone: number, birthday: Date, status: string): Promise<any | undefined> => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         // Check if there is a user with that email
         let isRegister = await userModel.findOne({ email: email })
@@ -57,7 +57,7 @@ export const registerUser = async (firstname: string, lastname: string, email: s
 export const login = async (email: string, password: string) => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         let userFound = await userModel.findOne({ email: email })
         const {firstname, lastname} = userFound
@@ -94,7 +94,7 @@ export const login = async (email: string, password: string) => {
 //Validate email
 export const validateEmail = async (token: string) => {
     try {
-        const userModel = userEntity()
+        const userModel = Users
         let id: string = ''
         let isVerified: boolean = false
 
@@ -134,7 +134,7 @@ export const validateEmail = async (token: string) => {
 export const sendMailResetPassowrd = async (email: string) => {
 
     try {
-        const userModel = userEntity()
+        const userModel = Users
         
         const code = Math.floor(1000 + Math.random() * 9000)
 
@@ -159,7 +159,7 @@ export const sendMailResetPassowrd = async (email: string) => {
 export const codeVerification = async (code: number, id: string) => {
 
     try {
-        const userModel = userEntity()
+        const userModel = Users
 
         let user = await userModel.findById(id)
         
@@ -181,7 +181,7 @@ export const codeVerification = async (code: number, id: string) => {
 //Reset password
 export const resetPassowrd = async (password: string, id: string)  => {
     try {
-        const userModel = userEntity()
+        const userModel = Users
 
         const salt = await genSalt(10)
         const encrypted = await hash(password, salt)

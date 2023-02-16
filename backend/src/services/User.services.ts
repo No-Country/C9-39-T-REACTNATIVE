@@ -1,11 +1,12 @@
-import { userEntity } from "../domain/entities/User.entity";
+import { Users } from "../domain/entities/User.entity"
+
 
 
 
 export const createUser = async (user: any): Promise<any | undefined> => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         //Create new User
         const created = await userModel.create(user)
@@ -20,7 +21,7 @@ export const getAllUser = async (): Promise<any | undefined> => {
 
     try {
 
-        let userModel = userEntity()
+        let userModel = Users
 
         let data = await userModel.find().populate('expenses')
 
@@ -36,7 +37,7 @@ export const getAllUser = async (): Promise<any | undefined> => {
 export const getUserById = async (id: string): Promise<any | undefined> => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         let data = await userModel.findById(id).populate('expenses')
 
@@ -51,7 +52,7 @@ export const getUserById = async (id: string): Promise<any | undefined> => {
 export const updateUserById = async (id: string, data: any): Promise<any | undefined> => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         const user = await getUserById(id)
 
@@ -73,7 +74,7 @@ export const updateUserById = async (id: string, data: any): Promise<any | undef
 export const deleteUserById = async (id: string): Promise<any | undefined> => {
 
     try {
-        let userModel = userEntity()
+        let userModel = Users
 
         await userModel.deleteOne({ _id: id })
 
