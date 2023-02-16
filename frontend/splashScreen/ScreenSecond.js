@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, Text, Button,Image, StyleSheet } from "react-native";
+import { View, Text, Button,Image, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native'
+// import ScreenSecond from './ScreenSecond';
+
 
 export default function ScreenSecond () {
+
+    const navigation = useNavigation()
     return (
         <View style = {styles.container}>
             <View style = {styles.header}>
@@ -30,20 +35,28 @@ export default function ScreenSecond () {
 
             </View>
             <View style={styles.footer}>
-                <Text>
-                    Omitir
-                </Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('ScreenFirst')}
+                >
+                    <Text>
+                        Omitir
+                    </Text>
+                </TouchableOpacity>
                 {/* <Button
                 title = 'next'
             
                 > */}
+                <TouchableOpacity
+                 onPress={() => navigation.navigate('ScreenThird')}
+                >
                     <Icon
-                    name='arrow-right'
+                    name='arrow-circle-right'
                     size={50}
                     color='#198E6B'
                     >
 
                     </Icon>
+                </TouchableOpacity>
 
                 {/* </Button> */}
             </View>
@@ -92,7 +105,7 @@ const styles = StyleSheet.create({
         height:12,
         borderRadius: 50,
         backgroundColor: '#198E6B',
-        marginRight: 5
+        marginRight: 10
     },
     circleSecond:{
         width: 10,
