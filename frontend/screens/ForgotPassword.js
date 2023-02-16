@@ -1,24 +1,55 @@
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from 'react'
 import Input from '../components/shared/Input'
 import SubmitButton from '../components/shared/SubmitButton'
 import { AntDesign } from '@expo/vector-icons'
 import { mockFetch } from '../utils'
+import axios from 'axios'
+import { API } from '../config'
 
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
 
   const onPress = async () => {
-    setLoading(true)
+    
     try {
-      // request go here
+      setLoading(true)
+
+      if (!email) {
+				Alert.alert('Error', 'Debes completar el email', [
+					{text: 'Aceptar'},
+				]);
+				setLoading(false)
+				return
+			}
+
+      const { data } = await axios.post(`${API}/auth/sendresetpassword`, {
+				email
+			})
+
+			// BORRAR LUEGO
+			console.log(data);
+
+      if (!data.id) {
+				Alert.alert('Error', 'Hubo un error al recuperar contraseña', [
+					{text: 'Aceptar'},
+				]);
+				setLoading(false)
+				return
+			}
+
       await mockFetch(1000)
-      navigation.navigate('VerifyEmailCode')
-    } catch {
-    } finally {
-      setLoading(false)
-    }
+      navigation.navigate('VerifyEmailCode', {
+        id: data.id
+      })
+    } catch (error) {
+      console.log(error);
+			Alert.alert('Error', 'Hubo un error al recuperar contraseña', [
+				{text: 'Aceptar'},
+			]);
+			setLoading(false);
+		}
   }
 
   return (
