@@ -143,7 +143,8 @@ export const sendMailResetPassowrd = async (email: string) => {
         let firstname: string = user.firstname
         let id: string = user._id
         
-        await userModel.findOneAndUpdate({email: email}, {codeVerification: code})
+        const response = await userModel.findOneAndUpdate({email: email}, {codeVerification: code})
+        console.log(response)
 
         resetPassowrdEmail({email, firstname, code})
 
