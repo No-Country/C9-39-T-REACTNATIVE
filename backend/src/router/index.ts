@@ -2,6 +2,7 @@ import express from 'express'
 import authRouter from './Auth.routes'
 import categoryRouter from './Category.routes'
 import dischargeRouter from './Discharge.routes'
+import filterRouter from './Filter.routes'
 import userRouter from './User.routes'
 
 let server = express()
@@ -19,5 +20,7 @@ server.use('/auth', authRouter)
 server.use('/discharge', dischargeRouter)
 //Category routes
 server.use('/category', categoryRouter)
+//Filter routes
+server.use('/filter', filterRouter)
 
 export default server
