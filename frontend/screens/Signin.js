@@ -9,22 +9,28 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import { API } from '../config'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
   const [password, onChangePassword] = React.useState('')
 
 
-    const submitLogin = async () => {
-      if (!email || !password){
-        Alert.alert('Por favor ingresa tu email y contraseña')
-        return
-      }
-      const { data } = await axios.post(`${API}/auth/login`,{
-        email,password
+  const submitLogin = async () => {
+    try {
+      console.log(email,password);
+      const {data} = await axios.post(`https://gringotts-henna.vercel.app/api/auth/login`, {
+        email,
+        password,
       })
-      console.log(data)
+      await AsyncStorage.setItem("@token", data.token);
+      await AsyncStorage.setItem("@firstname", data.user.firstname);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log(error);
+    }
   }
+
 
 
   return (
@@ -34,7 +40,7 @@ const Signin = ({ navigation }) => {
         <Text>Email</Text>
         <TextInput
           style={styles.email}
-          onChangeText={onChangeEmail}
+          onChangeText={(email) => onChangeEmail(email)}
           value={email}
           placeholder='📧 Escribe Tu Correo Electrónico'
           keyboardType='email-address'
@@ -43,7 +49,7 @@ const Signin = ({ navigation }) => {
         <TextInput
           style={styles.password}
           secureTextEntry={true}
-          onChangeText={onChangePassword}
+          onChangeText={(password) => onChangePassword(password)}
           value={password}
           placeholder='🔒 Escribe Tu Contraseña'
           keyboardType='default'
