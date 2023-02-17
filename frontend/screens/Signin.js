@@ -23,8 +23,9 @@ const Signin = ({ navigation }) => {
         email,
         password,
       })
+      console.log(data);
       await AsyncStorage.setItem("@token", data.token);
-      await AsyncStorage.setItem("@firstname", data.user.firstname);
+      await AsyncStorage.setItem("@firstname", data.firstname);
       navigation.navigate("Home");
     } catch (error) {
       console.log(error);
