@@ -25,14 +25,19 @@ const VerifyEmailCode = ({ route, navigation }) => {
 				setLoading(false)
 				return
 			}
+      console.log(id);
+      console.log(verificationCode);
 
-      const { data } = await axios.post(`${API}/auth/codeverification`, {
-				id, 
+      const { data } = await axios.get(`${API}/auth/codeverification`, {
+				id: `${id}`, 
         code: verificationCode
 			})
 
+      // TODO: SI DEVUELVE SUCCESS: FALSE NO SEGUIR.
+
 			// BORRAR LUEGO
 			console.log(data);
+      setLoading(false)
 
       await mockFetch(1000)
       navigation.navigate('ResetPassword', {

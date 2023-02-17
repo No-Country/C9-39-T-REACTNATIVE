@@ -24,8 +24,8 @@ const Tab = createBottomTabNavigator()
 export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
-  const [authenticated, setAuthenticated] = useState(true)
-  //const authenticated = false
+  //const authenticated = [isValidated,setIsValidated] = React.useState(false)
+  const authenticated = true
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
@@ -51,8 +51,7 @@ export default function AppRoutes() {
                 name={'home'}
                 size={size}
                 color={focused ? colors.primary : color}
-              />
-
+              /> 
             ),
           }}
         />
@@ -72,11 +71,11 @@ export default function AppRoutes() {
         />
       </Tab.Navigator>
     )
-  }
+  } 
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Signin'>
         {authenticated ? (
           <>
             <Stack.Screen
@@ -84,7 +83,7 @@ export default function AppRoutes() {
               component={Home}
               options={{
                 headerShown: false,
-              }}
+              }} 
             />
           </>
         ) : (

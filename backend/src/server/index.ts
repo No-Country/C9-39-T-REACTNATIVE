@@ -2,7 +2,6 @@ import express, {Express, Request, Response} from 'express'
 import rootRouter from '../router/index'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-
 dotenv.config()
 
 const server: Express = express()

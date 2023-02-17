@@ -7,8 +7,8 @@ import {
   Alert,
   TextInput,
 } from 'react-native'
-import axios from "axios"
-import API from "../config"
+import axios from 'axios'
+import { API } from '../config'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Signin = ({ navigation }) => {

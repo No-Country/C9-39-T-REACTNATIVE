@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CardTotal from '../components/home/CardTotal'
 import MainHome from '../components/home/MainHome'
@@ -42,7 +43,11 @@ const HomeScreen = () => {
 					}
 				</View>
 			</ScrollView>
+<<<<<<< HEAD
 		</SafeAreaView>
+=======
+		</SafeAreaView >
+>>>>>>> 10ea9e823c0e487e8d14b73f06612efef746469a
 	)
 }
 
@@ -50,7 +55,13 @@ const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 20,
 		flex: 1,
-		backgroundColor: 'white'
+		backgroundColor: 'white',
+		paddingTop: 20
+	},
+	containerButtonAdd: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	containerButtonAdd: {
 		display: 'flex',

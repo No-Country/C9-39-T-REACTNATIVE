@@ -46,13 +46,16 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
+      {
+        console.log(item.category)
+      }
       <Text>{item.category.join(', ')}</Text>
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
       <Text>{item.description}</Text>
 
-      <Text>{item.createdAt.toLocaleDateString()}</Text>
+     {/* <Text>{item.createAt.toLocaleDateString()}</Text> */}
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text
@@ -70,17 +73,17 @@ const RenderItem = ({ item }) => (
 )
 
 const Expense = () => {
-  const [data, setData] = useState(mockData)
-  console.log(data)
+  const [data, setData] = useState({})
+  //console.log(data)
   const RetrieveData = async () => {
     try {
       const response = await fetch(
         'https://gringotts-henna.vercel.app/api/discharge'
       )
-      const data = await response.json()
+      const dataJson = await response.json()
+      console.log(dataJson)
       //setData(data)
-      setData(mockData)
-      console.log(data)
+      setData(dataJson.data)
     } catch (error) {
       console.error(error)
     }
@@ -92,7 +95,7 @@ const Expense = () => {
   return (
     <View style={styles.container}>
       {data.length ? <Expenses data={data} /> : <Empty />}
-      <TransparentButton title='Agregar' />
+      {/* <TransparentButton title='Agregar' /> */}
     </View>
   )
 }
@@ -162,6 +165,7 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
+  console.log("VER ", data);
   return (
     <View
       style={{
@@ -180,7 +184,7 @@ const Expenses = ({ data }) => {
         />
       </View>
       {data.map((item) => {
-        return <RenderItem item={item} key={item.createdAt.toISOString()} />
+        return <RenderItem item={item} key={item.id} />
       })}
     </View>
   )

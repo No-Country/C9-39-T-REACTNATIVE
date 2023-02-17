@@ -42,10 +42,7 @@ const Signup = ({ navigation }) => {
 				"firstname": name,
 				email,
 				password,
-				"lastname": "Last",
-				"phone": "3524586987",
-				"birthday": "2010-01-01",
-				"status": "true"
+				"lastname": "Last"
 			})
 
 			// BORRAR LUEGO
