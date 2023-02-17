@@ -71,7 +71,7 @@ export default function AppRoutes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Signup'>
+      <Stack.Navigator initialRouteName='Signin'>
         {authenticated ? (
           <>
             <Stack.Screen
