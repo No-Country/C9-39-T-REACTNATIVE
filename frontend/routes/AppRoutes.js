@@ -25,7 +25,7 @@ export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
   //const authenticated = [isValidated,setIsValidated] = React.useState(false)
-  const authenticated = false
+  const authenticated = true
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
