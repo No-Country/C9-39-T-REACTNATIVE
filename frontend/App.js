@@ -5,8 +5,8 @@ import SplashScreen from './splashScreen/SplashScreen';
 
 export default function App() {
   return (
-    // <AppRoutes />
-    <SplashScreen/>
+    <AppRoutes />
+    // <SplashScreen/>
   );
 }
 

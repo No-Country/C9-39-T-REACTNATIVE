@@ -11,6 +11,10 @@ import Costs from "../screens/Costs";
 import Income from "../screens/Income";
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
+//imports components splash screen
+import ScreenFirst from '../splashScreen/ScreenFirst'
+import ScreenSecond from '../splashScreen/ScreenSecond'
+import ScreenThird from '../splashScreen/ScreenThird'
 
 
 
@@ -47,7 +51,8 @@ export default function AppRoutes() {
           component={Costs}
           options={{
             tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? "#433362" : color }}>Gastos</Text>
+              <Text style={{ color: focused ? "#433362" : color }}>Gastos
+              </Text>
             ),
             tabBarIcon: ({ focused, color, size }) => (
               <Feather
@@ -81,7 +86,11 @@ export default function AppRoutes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signin">
+      <Stack.Navigator initialRouteName="ScreenFirst"
+       screenOptions={{
+        headerShown: false,
+    }}
+      >
         {authenticated ? (
           <>
             <Stack.Screen
@@ -91,9 +100,13 @@ export default function AppRoutes() {
                 headerShown: false,
               }}
             />
+            
           </>
         ) : (
           <>
+            <Stack.Screen name="ScreenFirst" component={ScreenFirst} />
+            <Stack.Screen name="ScreenSecond" component={ScreenSecond} />
+            <Stack.Screen name="ScreenThird" component={ScreenThird} />
             <Stack.Screen
               name="Signup"
               component={Signup}
@@ -112,5 +125,38 @@ export default function AppRoutes() {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName="Signin">
+    //     {authenticated ? (
+    //       <>
+    //         <Stack.Screen
+    //           name="Home"
+    //           component={Home}
+    //           options={{
+    //             headerShown: false,
+    //           }}
+    //         />
+            
+    //       </>
+    //     ) : (
+    //       <>
+    //         <Stack.Screen
+    //           name="Signup"
+    //           component={Signup}
+    //           options={{
+    //             headerShown: false,
+    //           }}
+    //         />
+    //         <Stack.Screen
+    //           name="Signin"
+    //           component={Signin}
+    //           options={{
+    //             headerShown: false,
+    //           }}
+    //         />
+    //       </>
+    //     )}
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }

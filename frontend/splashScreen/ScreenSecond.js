@@ -36,7 +36,7 @@ export default function ScreenSecond () {
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('ScreenFirst')}
+                    onPress={() => navigation.navigate('Signup')}
                 >
                     <Text>
                         Omitir
