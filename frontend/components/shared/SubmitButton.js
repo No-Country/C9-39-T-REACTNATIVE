@@ -8,12 +8,13 @@ const SubmitButton = props => {
     /* const enabledBgColor = props.color || colors.primary;
     const disabledBgColor = colors.lightGrey;
     const bgColor = props.disabled ? disabledBgColor : enabledBgColor; */
+    const bgColor = props.bgColor ? props.bgColor : colors.primary;
 
     return <TouchableOpacity 
-			style={styles.button}
+			style={{ ...styles.button, backgroundColor: bgColor }}
 			onPress={props.onPress}
 		>
-        <Text style={{ color: 'white' }}>
+        <Text style={{ color: 'white', fontSize: 16 }}>
             { props.title }
         </Text>
     </TouchableOpacity>
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-		backgroundColor: colors.primary,
+		//backgroundColor: bgColor,
 		marginTop: 40,
     }
 });

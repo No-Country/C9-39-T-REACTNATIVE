@@ -12,7 +12,7 @@ const HomeScreen = () => {
 	const [addExpensesIncome, setAddExpensesIncome] = useState(false)
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
 			<ScrollView>
 				<View style={styles.container}>
 					{
@@ -43,11 +43,7 @@ const HomeScreen = () => {
 					}
 				</View>
 			</ScrollView>
-<<<<<<< HEAD
-		</SafeAreaView>
-=======
 		</SafeAreaView >
->>>>>>> 10ea9e823c0e487e8d14b73f06612efef746469a
 	)
 }
 

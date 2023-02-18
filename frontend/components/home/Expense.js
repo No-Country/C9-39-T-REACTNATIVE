@@ -46,9 +46,6 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
-      {
-        console.log(item.category)
-      }
       <Text>{item.category.join(', ')}</Text>
     </View>
     <View style={{ justifyContent: 'center' }}>
@@ -81,7 +78,6 @@ const Expense = () => {
         'https://gringotts-henna.vercel.app/api/discharge'
       )
       const dataJson = await response.json()
-      console.log(dataJson)
       //setData(data)
       setData(dataJson.data)
     } catch (error) {
@@ -165,7 +161,6 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
-  console.log("VER ", data);
   return (
     <View
       style={{

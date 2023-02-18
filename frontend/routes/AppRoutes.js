@@ -32,7 +32,7 @@ export default function AppRoutes() {
     await AsyncStorage.removeItem("@auth");
   }; */
 
-  const Home = () => {
+  /* const Home = () => {
     return (
       <Tab.Navigator
         screenOptions={{
@@ -71,7 +71,7 @@ export default function AppRoutes() {
         />
       </Tab.Navigator>
     )
-  } 
+  }  */
 
   return (
     <NavigationContainer>
@@ -80,7 +80,7 @@ export default function AppRoutes() {
           <>
             <Stack.Screen
               name='Home'
-              component={Home}
+              component={HomeScreen}
               options={{
                 headerShown: false,
               }} 
