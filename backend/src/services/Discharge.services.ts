@@ -1,5 +1,6 @@
 import { Users } from "../domain/entities/User.entity"
 import { Discharge } from "../domain/entities/Discharge.entity"
+import { updateUserById } from "./User.services"
 
 
 export const createDischarge = async (discharge: any): Promise<any | undefined> => {
@@ -11,6 +12,10 @@ export const createDischarge = async (discharge: any): Promise<any | undefined> 
 
         // Find user by ID
         const user = await userModel.findById(discharge.userId)
+        let totalAmount = user.totalAmount - discharge.amount
+
+        // Update total amount of the user
+        await updateUserById(discharge.userId, {totalAmount})
 
         // Create a new discharge
         const created = await dischargeModel.create(discharge)
@@ -61,7 +66,6 @@ export const getDischargeByName = async (name: string, id: string): Promise<any 
         let expName = new RegExp(name, 'i');
 
         const discharges = await getDischargesByUser(id)
-        console.log(discharges)
 
         //Filter the expenses that contain the word in the title or description
         const filtered = discharges.data.filter((discharge: any ) => expName.test(discharge.title) || expName.test(discharge.description))

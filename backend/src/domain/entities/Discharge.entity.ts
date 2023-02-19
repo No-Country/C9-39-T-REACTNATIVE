@@ -8,7 +8,7 @@ let dischargeSchema = new mongoose.Schema<IDischarge>({
     createAt: { type: Date, default: Date.now() },
     amount: { type: Number },
     userId: [{ type: Schema.Types.ObjectId, ref: 'users' }],
-    category: [{ type: Schema.Types.ObjectId, ref: 'category' }]
+    category: [{ type: Schema.Types.ObjectId, ref: 'categorydischarges' }]
 })
 
 export const Discharge = mongoose.models.discharges || mongoose.model<IDischarge>('discharges', dischargeSchema)

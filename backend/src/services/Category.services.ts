@@ -1,31 +1,61 @@
-import { Category } from "../domain/entities/Category.entity"
+import { CategoryIncome } from "../domain/entities/CategoryIncome.entity"
+import { CategoryDischarge } from "../domain/entities/CategoryDischarge.entity"
 
 
-export const createCategory = async (category: any) => {
+export const createDischargeCategory = async (category: any) => {
 
     try {
-        const categoryModel = Category
+        const categoryModel = CategoryDischarge
 
         const created = await categoryModel.create(category)
 
-        return { succes: true, created}
+        return { succes: true, created }
     } catch (error) {
         console.log(error)
-        return { success: false, message: 'Error to create a new category'}
+        return { success: false, message: 'Error to create a new category' }
     }
 }
 
-export const getAllCategoty = async () => {
+export const getAllDischargeCategoty = async () => {
 
     try {
-        const categoryModel = Category
+        const categoryModel = CategoryDischarge
 
         const data = await categoryModel.find()
 
-        return {success: true, data}
+        return { success: true, data }
 
     } catch (error) {
         console.log(error)
-        return { success: false, message: 'Error to get all category'}
+        return { success: false, message: 'Error to get all category' }
+    }
+}
+
+export const createIncomeCategory = async (category: any) => {
+
+    try {
+        const categoryModel = CategoryIncome
+
+        const created = await categoryModel.create(category)
+
+        return { sucees: true, created }
+    } catch (error) {
+        console.log(error)
+        return { success: false, message: 'Error to create a new category' }
+    }
+}
+
+export const getAllIncomeCategory = async () => {
+
+    try {
+        const categoryModel = CategoryIncome
+
+        const data = await categoryModel.find()
+
+        return { success: true, data }
+
+    } catch (error) {
+        console.log(error)
+        return { success: false, message: 'Error to get all category' }
     }
 }
