@@ -5,7 +5,6 @@ import { ICategory } from "../interfaces/ICategory.interfaces"
 
 let categoryIncomeSchema = new mongoose.Schema<ICategory>({
     name: {type: String, required: true},
-    description: {type: String, required: true},
     logo: {type: String, required: true},
     vector: {type: String, required: true}
 })
