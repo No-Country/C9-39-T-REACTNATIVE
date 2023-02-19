@@ -9,6 +9,7 @@ let incomeSchema = new mongoose.Schema<IIncome>({
     description: {type: String},
     createAt: {type: Date, default: Date.now()},
     amount: {type: Number},
+    type: {type: String, enum: ['discharge', 'income'], required: true},
     userId: [{ type: Schema.Types.ObjectId, ref: 'users' }],
     category: [{ type: Schema.Types.ObjectId, ref: 'categoryincomes' }]
 })

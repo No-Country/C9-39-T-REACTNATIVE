@@ -7,8 +7,8 @@ export class DischargeController {
 
     //Create discharge
     static async createDischarge(req: Request, res: Response){
-        const {title, description, amount, userId, category} = req.body
-        const discharge = {title, description, amount, userId, category}
+        const {title, description, amount, type, userId, category} = req.body
+        const discharge = {title, description, amount, type, userId, category}
         const created = await createDischarge(discharge)
 
         res.send(created)

@@ -14,7 +14,7 @@ server.use('/api',
 server.use(express.static('public'))
 
 //Mongoose Connection
-mongoose.connect('mongodb+srv://admin:nocountry123@clusterpractice.qhazbpk.mongodb.net/gringotts')
+mongoose.connect('mongodb+srv://admin:nocountry123@clusterpractice.qhazbpk.mongodb.net/nocountry')
 
 //Content Type Config
 server.use(express.urlencoded({extended: true, limit: '50mb'}))
