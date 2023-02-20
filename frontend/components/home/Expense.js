@@ -5,33 +5,6 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import colors from '../../constants/colors'
 import TransparentButton from '../shared/TransparentButton'
 
-const mockData = [
-  {
-    title: 'Example Title 1',
-    description: 'Example Description 1',
-    createdAt: new Date('2023-02-14T18:28:41.494Z'),
-    amount: 100,
-    userId: ['user1'],
-    category: ['category1'],
-  },
-  {
-    title: 'Example Title 2',
-    description: 'Example Description 2',
-    createdAt: new Date('2023-01-12T18:28:41.494Z'),
-    amount: 200,
-    userId: ['user2'],
-    category: ['category2'],
-  },
-  {
-    title: 'Example Title 3',
-    description: 'Example Description 3',
-    createdAt: new Date('2023-01-14T18:28:41.494Z'),
-    amount: 300,
-    userId: ['user3'],
-    category: ['category3'],
-  },
-]
-
 const RenderItem = ({ item }) => (
   <View
     style={{
@@ -46,13 +19,12 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
-      <Text>{item.category.join(', ')}</Text>
+      <Text>Image</Text>
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
       <Text>{item.description}</Text>
-
-      <Text>{item.createdAt.toLocaleDateString()}</Text>
+      <Text style={{ color: 'gray' }}>{item.createAt}</Text>
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text
@@ -70,17 +42,15 @@ const RenderItem = ({ item }) => (
 )
 
 const Expense = () => {
-  const [data, setData] = useState(mockData)
-  console.log(data)
+  const [data, setData] = useState({})
   const RetrieveData = async () => {
     try {
       const response = await fetch(
         'https://gringotts-henna.vercel.app/api/discharge'
       )
-      const data = await response.json()
-      //setData(data)
-      setData(mockData)
-      console.log(data)
+      const dataJson = await response.json()
+      console.log(dataJson)
+      setData(dataJson.data)
     } catch (error) {
       console.error(error)
     }
@@ -162,6 +132,7 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
+  console.log('VER ', data)
   return (
     <View
       style={{
@@ -180,7 +151,7 @@ const Expenses = ({ data }) => {
         />
       </View>
       {data.map((item) => {
-        return <RenderItem item={item} key={item.createdAt.toISOString()} />
+        return <RenderItem item={item} key={item._id} />
       })}
     </View>
   )
