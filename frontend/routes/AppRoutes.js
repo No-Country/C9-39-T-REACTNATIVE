@@ -17,6 +17,10 @@ import colors from '../constants/colors'
 
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
+//imports components splash screen
+import ScreenFirst from '../splashScreen/ScreenFirst'
+import ScreenSecond from '../splashScreen/ScreenSecond'
+import ScreenThird from '../splashScreen/ScreenThird'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -46,6 +50,10 @@ export default function AppRoutes() {
           name='Inicio'
           component={HomeScreen}
           options={{
+            tabBarLabel: ({ focused, color, size }) => (
+              <Text style={{ color: focused ? "#433362" : color }}>Gastos
+              </Text>
+            ),
             tabBarIcon: ({ focused, color, size }) => (
               <Entypo
                 name={'home'}
@@ -75,7 +83,11 @@ export default function AppRoutes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Signin'>
+      <Stack.Navigator initialRouteName="ScreenFirst"
+       screenOptions={{
+        headerShown: false,
+    }}
+      >
         {authenticated ? (
           <>
             <Stack.Screen
@@ -85,9 +97,13 @@ export default function AppRoutes() {
                 headerShown: false,
               }} 
             />
+            
           </>
         ) : (
           <>
+            <Stack.Screen name="ScreenFirst" component={ScreenFirst} />
+            <Stack.Screen name="ScreenSecond" component={ScreenSecond} />
+            <Stack.Screen name="ScreenThird" component={ScreenThird} />
             <Stack.Screen
               name='Signin'
               component={Signin}
