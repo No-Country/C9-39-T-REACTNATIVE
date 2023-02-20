@@ -5,33 +5,6 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import colors from '../../constants/colors'
 import TransparentButton from '../shared/TransparentButton'
 
-const mockData = [
-  {
-    title: 'Example Title 1',
-    description: 'Example Description 1',
-    createdAt: new Date('2023-02-14T18:28:41.494Z'),
-    amount: 100,
-    userId: ['user1'],
-    category: ['category1'],
-  },
-  {
-    title: 'Example Title 2',
-    description: 'Example Description 2',
-    createdAt: new Date('2023-01-12T18:28:41.494Z'),
-    amount: 200,
-    userId: ['user2'],
-    category: ['category2'],
-  },
-  {
-    title: 'Example Title 3',
-    description: 'Example Description 3',
-    createdAt: new Date('2023-01-14T18:28:41.494Z'),
-    amount: 300,
-    userId: ['user3'],
-    category: ['category3'],
-  },
-]
-
 const RenderItem = ({ item }) => (
   <View
     style={{
@@ -46,16 +19,24 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
+<<<<<<< HEAD
       {
         console.log(item.category)
       }
       <Text>{item.category.join(', ')}</Text>
+=======
+      <Text>Image</Text>
+>>>>>>> lista-gastos-Dan
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
       <Text>{item.description}</Text>
+<<<<<<< HEAD
 
      {/* <Text>{item.createAt.toLocaleDateString()}</Text> */}
+=======
+      <Text style={{ color: 'gray' }}>{item.createAt}</Text>
+>>>>>>> lista-gastos-Dan
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text
@@ -74,7 +55,10 @@ const RenderItem = ({ item }) => (
 
 const Expense = () => {
   const [data, setData] = useState({})
+<<<<<<< HEAD
   //console.log(data)
+=======
+>>>>>>> lista-gastos-Dan
   const RetrieveData = async () => {
     try {
       const response = await fetch(
@@ -82,7 +66,10 @@ const Expense = () => {
       )
       const dataJson = await response.json()
       console.log(dataJson)
+<<<<<<< HEAD
       //setData(data)
+=======
+>>>>>>> lista-gastos-Dan
       setData(dataJson.data)
     } catch (error) {
       console.error(error)
@@ -165,7 +152,11 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
+<<<<<<< HEAD
   console.log("VER ", data);
+=======
+  console.log('VER ', data)
+>>>>>>> lista-gastos-Dan
   return (
     <View
       style={{
@@ -184,7 +175,11 @@ const Expenses = ({ data }) => {
         />
       </View>
       {data.map((item) => {
+<<<<<<< HEAD
         return <RenderItem item={item} key={item.id} />
+=======
+        return <RenderItem item={item} key={item._id} />
+>>>>>>> lista-gastos-Dan
       })}
     </View>
   )
