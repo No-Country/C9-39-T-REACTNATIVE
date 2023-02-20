@@ -61,7 +61,7 @@ export const updateUserById = async (id: string, data: any): Promise<any | undef
         }
 
         const updated = await userModel.findByIdAndUpdate(id, data)
-
+        
         return { success: true, updated }
 
     } catch (error) {

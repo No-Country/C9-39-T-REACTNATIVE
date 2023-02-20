@@ -1,4 +1,4 @@
-export interface IDischarge{
+export interface IIncome {
     title: string,
     description: string,
     createAt: Date,

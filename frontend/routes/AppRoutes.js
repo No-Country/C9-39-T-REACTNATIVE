@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from 'react-native-vector-icons/Feather'
 import Entypo from 'react-native-vector-icons/Entypo'
-import React from 'react'
+import React, { useState } from 'react'
 
 import Signup from '../screens/Signup'
 import Signin from '../screens/Signin'
@@ -32,12 +32,14 @@ export default function AppRoutes() {
     await AsyncStorage.removeItem("@auth");
   }; */
 
-  const Home = () => {
+  /* const Home = () => {
     return (
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
-          headerShown: false
+          //headerShown: false,
+          headerTitle: "",
+          headerStatusBarHeight: 0,
         }}
       >
         <Tab.Screen
@@ -69,7 +71,7 @@ export default function AppRoutes() {
         />
       </Tab.Navigator>
     )
-  } 
+  }  */
 
   return (
     <NavigationContainer>
@@ -78,7 +80,7 @@ export default function AppRoutes() {
           <>
             <Stack.Screen
               name='Home'
-              component={Home}
+              component={HomeScreen}
               options={{
                 headerShown: false,
               }} 

@@ -8,7 +8,9 @@ const categoryRouter = Router()
 const jsonParser = bodyParser.json()
 
 
-categoryRouter.post('/', jsonParser, CategoryController.createCategory)
-categoryRouter.get('/', CategoryController.getAllCategory)
+categoryRouter.post('/discharge', jsonParser, CategoryController.createDischargeCategory)
+categoryRouter.get('/discharge', CategoryController.getAllDischargeCategory)
+categoryRouter.post('/income', jsonParser, CategoryController.createIncomeCategory)
+categoryRouter.get('/income', CategoryController.getAllIncomeCategory)
 
 export default categoryRouter

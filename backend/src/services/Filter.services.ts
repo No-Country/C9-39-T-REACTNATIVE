@@ -7,9 +7,7 @@ export const filterByCategory = async (category: string, id: string): Promise<an
     try {
         let catExp = new RegExp(category, 'i');
         //Obtain data for user by ID
-        const discharges = await getDischargesByUser(id)
-        console.log(discharges)
-        
+        const discharges = await getDischargesByUser(id)        
 
         //Filter discharges by name
         const filtered = discharges.data.filter((discharge: any ) => catExp.test(discharge.category[0].name))

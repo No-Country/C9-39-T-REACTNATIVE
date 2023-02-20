@@ -95,7 +95,7 @@ const Signup = ({ navigation }) => {
 					<Input
 						id="password"
 						label="Contraseña"
-						icon="lock"
+						rightIcon="lock"
 						autoCapitalize="none"
 						secureTextEntry
 						iconPack={Feather}
@@ -106,7 +106,7 @@ const Signup = ({ navigation }) => {
 					<Input
 						id="password"
 						label="Confirmar Contraseña"
-						icon="lock"
+						rightIcon="lock"
 						autoCapitalize="none"
 						secureTextEntry
 						iconPack={Feather}
