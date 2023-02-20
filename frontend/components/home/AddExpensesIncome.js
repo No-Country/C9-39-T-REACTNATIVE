@@ -1,33 +1,38 @@
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Dimensions, StyleSheet, TextInput, FlatList, Alert } from 'react-native'
-import React, { useState } from 'react'
-import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react'
+import { AntDesign, FontAwesome, MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 
 import colors from '../../constants/colors';
 import SubmitButton from '../shared/SubmitButton';
 import axios from 'axios';
 import { API } from '../../config';
-import { CheckBox } from 'react-native-elements';
+import Entrada from './expenseIncome/Entrada';
 
 const items = ["Ingreso", "Gasto"];
 const bottons = ["Diario", "Semanal", "Mensual"];
 
-const categorias = [
+const VectorsComponents = {
+	"AntDesign": AntDesign,
+	"FontAwesome": FontAwesome,
+	"Ionicons": Ionicons,
+	"MaterialIcons": MaterialIcons,
+	"Entypo": Entypo
+}
+
+/* const categoriasGastos = [
 	{
 		"id": "63e63d1c372fa3673743d73f",
-		"title": "Salario",
-		"logo": 'money'
+		"name": "Electrodomesticos",
+		"logo": 'devices-other',
+		"vector": "MaterialIcons"
 	},
 	{
 		"id": "63e63d1c372fa3673743d73f",
-		"title": "Transferencia Bancaria",
-		"logo": 'bank'
+		"name": "Otros",
+		"logo": 'shoppingcart',
+		"vector": "AntDesign"
 	},
-	{
-		"id": "63e63d1c372fa3673743d73f",
-		"title": "Otro",
-		"logo": 'dollar'
-	},
-]
+] */
 
 const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 	const [isExpense, setIsExpense] = useState(0);
@@ -45,10 +50,27 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 	const [checkRepeatDay, setCheckRepeatDay] = useState(false);
 	const [daySelected, setDaySelected] = useState(0)
 
+	const [categoriasGastos, setCategoriasGastos] = useState([])
+	const [categoriasIngresos, setCategoriasIngresos] = useState([])
+
 	const selectCategory = (item) => {
-		console.log(item);
 		setShowCategories(false)
 		setCategory(item)
+	}
+
+	useEffect(() => {
+		getIncome()
+		getDischarge()
+	}, [])
+	
+	const getIncome = async () => {
+		const { data } = await axios.get(`${API}/category/income`)
+		setCategoriasIngresos(data.data)
+	} 
+
+	const getDischarge = async () => {
+		const { data } = await axios.get(`${API}/category/discharge`)
+		setCategoriasGastos(data.data)
 	}
 
 	const submitExpenseIncome = async () => {
@@ -65,14 +87,18 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				return
 			}
 
-			const { data } = await axios.post(`${API}/discharge`, {
-				title: isExpense ? 'Gasto' : 'Ingreso',
+			const { data } = await axios.post(`${API}/${isExpense ? 'discharge' : 'income'}`, {
+				type: isExpense ? 'discharge' : 'income',
+				title: category.name,
 				description,
 				amount: monto,
 				userId: "63ee9bdc4f9465196029dda9",
-				category: category.id
-			})
+				category: category.id,
 
+				logo: category.vector,
+				vector: category.logo
+			})
+			
 			setLoading(false)
 			Alert.alert('Listo!', isExpense ? 'Gasto Registrado.' : 'Ingreso Registrado.', [
 				{ text: 'Aceptar' },
@@ -174,7 +200,7 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 					</View>
 					<TouchableOpacity onPress={() => setShowCategories(!showCategories)}>
 						<View style={{ ...styles.inputContainer, justifyContent: 'space-between', borderColor: isExpense === 1 ? colors.redLight : colors.primary }}>
-							<Text>{category ? category.title : 'Seleccionar'}</Text>
+							<Text>{category ? category.name : 'Seleccionar'}</Text>
 							<MaterialIcons name="keyboard-arrow-down" size={24} color={isExpense === 1 ? colors.redLight : colors.primary} />
 						</View>
 					</TouchableOpacity>
@@ -183,19 +209,27 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 						showCategories && (
 							<View style={styles.categoryContainer}>
 								<FlatList
-									data={categorias}
+									data={isExpense ? categoriasGastos : categoriasIngresos}
+									scrollEnabled={false}
 									renderItem={(itemData) => {
+										const Vector = VectorsComponents[itemData.item.vector]
 										return (
-											<TouchableOpacity onPress={() => selectCategory(itemData.item)}>
+											<TouchableOpacity key={itemData.item._id} onPress={() => selectCategory(itemData.item)}>
 												<View style={styles.cardCategory}>
-													<FontAwesome
+													{/* <FontAwesome
 														name={itemData.item.logo}
 														size={28}
 														color={colors.primary}
 														style={{ marginLeft: 10 }}
+													/> */}
+													<Vector
+														name={itemData.item.logo}
+														size={28}
+														color={isExpense ? colors.redLight : colors.primary}
+														style={{ marginLeft: 10 }}
 													/>
 													<Text style={{ marginLeft: 20, fontSize: 18, fontWeight: '500' }}>
-														{itemData.item.title}
+														{itemData.item.name}
 													</Text>
 												</View>
 											</TouchableOpacity>
@@ -206,73 +240,16 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 						)
 					}
 
-					<View style={{ ...styles.row, alignItems: 'center', marginTop: 10 }}>
-						<Text style={{ fontSize: 18, fontWeight: 'bold', letterSpacing: 0.3 }}>
-							Entrada
-						</Text>
-					</View>
-					<View style={{ flexDirection: 'row' }}>
-						{bottons.map((item, index) => (
-							<View
-								key={item}
-							>
-								<TouchableOpacity
-									style={{
-										backgroundColor: buttonSelected === index ? isExpense === 1 ? colors.redLight : colors.primary : 'transparent',
-										fontSize: 16,
-										textAlign: 'center',
-										paddingHorizontal: 15,
-										paddingVertical: 5,
-										borderRadius: 10
-									}}
-									onPress={() => setButtonSelected(index)}
-								>
-									<Text
-										style={{
-											color: buttonSelected === index ? 'white' : colors.textGrey,
-											fontSize: 16,
-											textAlign: 'center',
-											fontWeight: '500'
-										}}
-									>
-										{item}
-									</Text>
-								</TouchableOpacity>
-							</View>
-						))}
-					</View>
-					<View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-						<CheckBox
-							/* title="algo"
-							checkedTitle='Verificado' */
-							checkedColor={isExpense === 1 ? colors.redLight : colors.primary}
-							checked={checkRepeatDay}
-							onPress={() => setCheckRepeatDay(!checkRepeatDay)}
-							style={{ backgroundColor: 'white' }}
-						/>
-						<Text style={{ fontSize: 15, fontWeight: '500', color: colors.textGrey }}>Se repetira cada dia</Text>
-					</View>
-
-					<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 10 }}>
-						{
-							["L", "M", "M", "J", "V", "S", "D"].map((item, index) => (
-								<TouchableOpacity disabled={!checkRepeatDay} onPress={() => setDaySelected(index)}>
-									<View 
-										style={{ 
-											height: 25, 
-											width: 25, 
-											borderRadius: 50, 
-											backgroundColor: daySelected === index ? isExpense === 1 ? colors.red : colors.primary : isExpense === 1 ? colors.redLight : colors.primaryLight, 
-											alignItems: 'center', 
-											justifyContent: 'center' 
-										}}
-									>
-										<Text style={{ fontWeight: 'bold', color: daySelected === index ? 'white' : 'black' }}>{item}</Text>
-									</View>
-								</TouchableOpacity>
-							))
-						}
-					</View>
+					<Entrada 
+						bottons={bottons} 
+						buttonSelected={buttonSelected} 
+						isExpense={isExpense} 
+						setButtonSelected={setButtonSelected}
+						checkRepeatDay={checkRepeatDay}
+						setCheckRepeatDay={setCheckRepeatDay}
+						daySelected={daySelected}
+						setDaySelected={setDaySelected}
+					/>
 
 					<View style={{ ...styles.row, alignItems: 'center', marginTop: 20 }}>
 						<Text style={{ fontSize: 18, fontWeight: 'bold', letterSpacing: 0.3 }}>
@@ -326,9 +303,9 @@ const styles = StyleSheet.create({
 	categoryContainer: {
 		borderColor: colors.textLightGrey,
 		borderWidth: 3,
-		maxHeight: 180,
+		//maxHeight: 180,
 		borderRadius: 12,
-		marginTop: -8
+		marginTop: -8,
 	},
 	cardCategory: {
 		display: 'flex',

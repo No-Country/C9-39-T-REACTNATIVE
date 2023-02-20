@@ -37,12 +37,15 @@ const HomeScreen = () => {
 
 								<View style={styles.containerButtonAdd}>
 									<TransparentButton title="Agregar" onPress={() => setAddExpensesIncome(true)} />
-								</View>
+								</View> 
 							</>
 						)
 					}
 				</View>
 			</ScrollView>
+			{/* <View style={styles.containerButtonAdd}>
+				<TransparentButton title="Agregar" onPress={() => setAddExpensesIncome(true)} />
+			</View>  */}
 		</SafeAreaView >
 	)
 }
@@ -58,13 +61,13 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+		marginBottom: 20,
 	},
-	containerButtonAdd: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		marginBottom: 20
-	},
+	/* containerButtonAdd: {
+		position: "absolute",
+        bottom: 10,
+        right: 10,
+	}, */
 })
 
 export default HomeScreen
