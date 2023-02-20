@@ -9,8 +9,8 @@ export class IncomeController {
 
     //Create income
     static async createIncome(req: Request, res: Response){
-        const {title, description, amount, type, userId, category} = req.body
-        const income = {title, description, amount, type, userId, category}
+        const {title, description, amount, type, logo, vector, userId, category} = req.body
+        const income = {title, description, amount, type, logo, vector, userId, category}
 
         const created = await createIncome(income)
 
