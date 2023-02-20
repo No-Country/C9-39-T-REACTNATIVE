@@ -3,6 +3,7 @@ import authRouter from './Auth.routes'
 import categoryRouter from './Category.routes'
 import dischargeRouter from './Discharge.routes'
 import filterRouter from './Filter.routes'
+import incomeRouter from './Income.routes'
 import userRouter from './User.routes'
 
 let server = express()
@@ -18,9 +19,11 @@ server.use('/users', userRouter)
 server.use('/auth', authRouter)
 // Discharge routes
 server.use('/discharge', dischargeRouter)
-//Category routes
+// Income routes
+server.use('/income', incomeRouter)
+// Category routes
 server.use('/category', categoryRouter)
-//Filter routes
+// Filter routes
 server.use('/filter', filterRouter)
 
 export default server
