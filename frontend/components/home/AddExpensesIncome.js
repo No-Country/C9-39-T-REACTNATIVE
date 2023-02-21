@@ -92,8 +92,8 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				title: category.name,
 				description,
 				amount: monto,
-				userId: "63ee9bdc4f9465196029dda9",
-				category: category.id,
+				userId: "63f3ed6d7e48ac052e3881ca",
+				category: category._id,
 
 				logo: category.vector,
 				vector: category.logo

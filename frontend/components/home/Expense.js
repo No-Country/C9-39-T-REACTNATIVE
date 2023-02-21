@@ -49,7 +49,7 @@ const Expense = () => {
         'https://gringotts-henna.vercel.app/api/discharge'
       )
       const dataJson = await response.json()
-      console.log(dataJson)
+      
       setData(dataJson.data)
     } catch (error) {
       console.error(error)
@@ -132,7 +132,7 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
-  console.log('VER ', data)
+  
   return (
     <View
       style={{
