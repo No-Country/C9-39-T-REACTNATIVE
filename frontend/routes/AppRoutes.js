@@ -29,7 +29,7 @@ export default function AppRoutes() {
   //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
   //const authenticated = [isValidated,setIsValidated] = React.useState(false)
-  const authenticated = true
+  const authenticated = false
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
@@ -83,10 +83,11 @@ export default function AppRoutes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ScreenFirst"
-       screenOptions={{
-        headerShown: false,
-    }}
+      <Stack.Navigator
+        initialRouteName='ScreenFirst'
+        screenOptions={{
+          headerShown: false,
+        }}
       >
         {authenticated ? (
           <>
@@ -95,15 +96,14 @@ export default function AppRoutes() {
               component={HomeScreen}
               options={{
                 headerShown: false,
-              }} 
+              }}
             />
-            
           </>
         ) : (
           <>
-            <Stack.Screen name="ScreenFirst" component={ScreenFirst} />
-            <Stack.Screen name="ScreenSecond" component={ScreenSecond} />
-            <Stack.Screen name="ScreenThird" component={ScreenThird} />
+            <Stack.Screen name='ScreenFirst' component={ScreenFirst} />
+            <Stack.Screen name='ScreenSecond' component={ScreenSecond} />
+            <Stack.Screen name='ScreenThird' component={ScreenThird} />
             <Stack.Screen
               name='Signin'
               component={Signin}
