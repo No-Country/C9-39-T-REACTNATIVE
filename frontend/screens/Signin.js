@@ -9,30 +9,30 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import { API } from '../config'
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
   const [password, onChangePassword] = React.useState('')
 
-
   const submitLogin = async () => {
     try {
-      console.log(email,password);
-      const {data} = await axios.post(`https://gringotts-henna.vercel.app/api/auth/login`, {
-        email,
-        password,
-      })
-      console.log(data);
-      await AsyncStorage.setItem("@token", data.token);
-      await AsyncStorage.setItem("@firstname", data.firstname);
-      navigation.navigate("Home");
+      console.log(email, password)
+      const { data } = await axios.post(
+        `https://gringotts-henna.vercel.app/api/auth/login`,
+        {
+          email,
+          password,
+        }
+      )
+      console.log(data)
+      await AsyncStorage.setItem('@token', data.token)
+      await AsyncStorage.setItem('@firstname', data.firstname)
+      navigation.navigate('Home')
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-
-
 
   return (
     <SafeAreaView style={styles.container}>

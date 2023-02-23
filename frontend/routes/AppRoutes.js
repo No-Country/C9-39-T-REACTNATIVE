@@ -4,8 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feather from 'react-native-vector-icons/Feather'
 import Entypo from 'react-native-vector-icons/Entypo'
-import React, { useState } from 'react'
-
+import React, { useContext, useState } from 'react'
 import Signup from '../screens/Signup'
 import Signin from '../screens/Signin'
 import HomeScreen from '../screens/HomeScreen'
@@ -14,6 +13,7 @@ import ForgotPassword from '../screens/ForgotPassword'
 import VerifyEmailCode from '../screens/VerifyEmailCode'
 import ResetPassword from '../screens/ResetPassword'
 import colors from '../constants/colors'
+import { AuthContext, AuthProvider } from '../global/globalVar.js'
 
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -26,10 +26,9 @@ const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 export default function AppRoutes() {
-  //const [auth, setAuth] = useContext(AuthContext);
   //const authenticated = auth?.token !== "" && auth?.user !== null;
   //const authenticated = [isValidated,setIsValidated] = React.useState(false)
-  const authenticated = false
+  const { auth, setAuth } = useContext(AuthContext)
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
@@ -89,7 +88,7 @@ export default function AppRoutes() {
           headerShown: false,
         }}
       >
-        {authenticated ? (
+        {auth ? (
           <>
             <Stack.Screen
               name='Home'
