@@ -2,7 +2,7 @@ GRINGOTTS
 
 Aplicación mobile para el control gastos e ingresos, divididos por categoría y tipo, también nos da una estadísticas basándonos en el total de los ingresos y los distintos tipos de gastos generados. Se crea una cuenta para poder acceder la cual debe validar con el correo, también se puede recuperar la contraseña de la misma verificando el código enviado al mail para poder cambiarla.
 
-Las tecnologías utilizadas para el front end son react native. Para el back end se utiliza NodeJs, express, Mongodb como base da datos y Mongoose como orm, JWT para la creación de token
+Las tecnologías utilizadas para el front end son react native, axios, async-storage. Para el back end se utiliza NodeJs, express, Mongodb como base da datos y Mongoose como orm, JWT para la creación de token
 
 - Kelly Charra / Team Leader
 - Dante Sandoval / Proyect Manager
