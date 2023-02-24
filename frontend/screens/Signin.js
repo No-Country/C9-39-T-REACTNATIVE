@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   StyleSheet,
   Button,
@@ -10,10 +10,13 @@ import {
 import axios from 'axios'
 import { API } from '../config'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { AuthContext } from '../global/globalVar'
 
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
   const [password, onChangePassword] = React.useState('')
+
+  const [auth, setAuth] = useContext(AuthContext);
 
   const submitLogin = async () => {
     try {
@@ -26,8 +29,8 @@ const Signin = ({ navigation }) => {
         }
       )
       console.log(data)
-      await AsyncStorage.setItem('@token', data.token)
-      await AsyncStorage.setItem('@firstname', data.firstname)
+      setAuth(data);
+      await AsyncStorage.setItem("@auth", JSON.stringify(data));
       navigation.navigate('Home')
     } catch (error) {
       console.log(error)

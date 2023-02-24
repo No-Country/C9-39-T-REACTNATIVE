@@ -26,59 +26,13 @@ const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 export default function AppRoutes() {
-  //const authenticated = auth?.token !== "" && auth?.user !== null;
-  //const authenticated = [isValidated,setIsValidated] = React.useState(false)
-  const { auth, setAuth } = useContext(AuthContext)
+  const [auth, setAuth] = useContext(AuthContext);
+  const authenticated = auth?.token !== "" && auth?.user !== null;
 
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
     await AsyncStorage.removeItem("@auth");
   }; */
-
-  /* const Home = () => {
-    return (
-      <Tab.Navigator
-        screenOptions={{
-          tabBarShowLabel: false,
-          //headerShown: false,
-          headerTitle: "",
-          headerStatusBarHeight: 0,
-        }}
-      >
-        <Tab.Screen
-          name='Inicio'
-          component={HomeScreen}
-          options={{
-            tabBarLabel: ({ focused, color, size }) => (
-              <Text style={{ color: focused ? "#433362" : color }}>Gastos
-              </Text>
-            ),
-            tabBarIcon: ({ focused, color, size }) => (
-              <Entypo
-                name={'home'}
-                size={size}
-                color={focused ? colors.primary : color}
-              /> 
-            ),
-          }}
-        />
-
-        <Tab.Screen
-          name='Ingresos'
-          component={Income}
-          options={{
-            tabBarIcon: ({ focused, color, size }) => (
-              <Feather
-                name={'user'}
-                size={size}
-                color={focused ? colors.primary : color}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    )
-  }  */
 
   return (
     <NavigationContainer>
@@ -88,7 +42,7 @@ export default function AppRoutes() {
           headerShown: false,
         }}
       >
-        {auth ? (
+        {authenticated ? (
           <>
             <Stack.Screen
               name='Home'
