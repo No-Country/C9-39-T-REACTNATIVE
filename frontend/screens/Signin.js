@@ -20,7 +20,6 @@ const Signin = ({ navigation }) => {
 
   const submitLogin = async () => {
     try {
-      console.log(email, password)
       const { data } = await axios.post(
         `https://gringotts-henna.vercel.app/api/auth/login`,
         {
@@ -28,12 +27,22 @@ const Signin = ({ navigation }) => {
           password,
         }
       )
-      console.log(data)
+      
+      if (!data.user) {
+        Alert.alert('Error', 'No existe un usuario.', [
+					{text: 'Aceptar'},
+				]);
+				return
+      }
+
       setAuth(data);
       await AsyncStorage.setItem("@auth", JSON.stringify(data));
       navigation.navigate('Home')
     } catch (error) {
-      console.log(error)
+      Alert.alert('Error', 'Ocurrio un error al iniciar. Itentelo otra ves.', [
+        {text: 'Aceptar'},
+      ]);
+      return
     }
   }
 
@@ -125,7 +134,6 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     borderWidth: 0,
-    backgroundColor: '#6FDDA7',
     borderRadius: 20,
   },
   password: {

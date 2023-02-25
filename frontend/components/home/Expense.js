@@ -62,7 +62,7 @@ const Expense = () => {
   return (
     <View style={styles.container}>
       {data.length ? <Expenses data={data} /> : <Empty />}
-      <TransparentButton title='Agregar' />
+      {/* <TransparentButton title='Agregar' /> */}
     </View>
   )
 }

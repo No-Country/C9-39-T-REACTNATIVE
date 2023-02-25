@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons'
 import moment from "moment";
 
 import colors from '../../constants/colors'
 import axios from 'axios'
 import { API } from '../../config'
+import { AuthContext } from '../../global/globalVar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VectorsComponents = {
 	"AntDesign": AntDesign,
@@ -19,6 +21,8 @@ const CardTotal = () => {
 	const [showDetails, setShowDetails] = useState(false)
 	const [incomes, setIncomes] = useState([])
 
+	const [auth, setAuth] = useContext(AuthContext);
+
 	useEffect(() => {
 		getIncome()
 	}, [])
@@ -31,8 +35,16 @@ const CardTotal = () => {
 		setIncomes(filterData)
 	}
 
+	const logout = async () => {
+		setAuth({ user: null, token: "" });
+		await AsyncStorage.removeItem("@auth");
+	};
+
 	return (
 		<View style={styles.containerCardTotal}>
+			<TouchableOpacity style={{ position: 'absolute', top: 15, right: 15 }} onPress={logout}>
+				<AntDesign name="closecircleo" size={24} color="white" />
+			</TouchableOpacity>
 			<View style={styles.cardTotal}>
 				<Text
 					style={{ color: 'white', fontSize: 18 }}

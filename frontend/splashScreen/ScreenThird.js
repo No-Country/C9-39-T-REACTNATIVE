@@ -44,7 +44,7 @@ export default function ScreenThird () {
                     </Icon>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Signup')}
+                    onPress={() => navigation.navigate('Signin')}
                 >
                     <Text>
                         Omitir

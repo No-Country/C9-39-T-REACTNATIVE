@@ -21,6 +21,7 @@ const Report = () => {
 
 	useEffect(async () => {
 		setLoading(true)
+
 		await getIncome()
 		await getDischarge()
 
@@ -73,7 +74,7 @@ const Report = () => {
 				!loading ? Object.keys(formatData).map((key, index) => {
 					let total = 0
 					return (
-						<View style={styles.container}>
+						<View style={styles.container} key={`rep-${index}`}>
 							{/* <Text>{key}</Text> */}
 							<Text style={{ marginTop: 5, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Ingresos</Text>
 							{
@@ -81,7 +82,7 @@ const Report = () => {
 									const Vector = VectorsComponents[ingreso.logo]
 									total = total + ingreso.amount
 									return (
-										<View style={styles.row}>
+										<View style={styles.row} key={`i-${index}`}>
 											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 												<View
 													style={{
@@ -116,7 +117,7 @@ const Report = () => {
 									const Vector = VectorsComponents[gasto.logo]
 									total = total - gasto.amount
 									return (
-										<View style={styles.row}>
+										<View style={styles.row} key={`g-${index}`}>
 											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 												<View
 													style={{

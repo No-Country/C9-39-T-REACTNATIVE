@@ -5,7 +5,7 @@ export default function ScreenFirst ({navigation}) {
     useEffect(() => {
         setTimeout(() => {
             navigation.navigate('ScreenSecond') 
-        }, 5000);
+        }, 3000);
     }, [])
     
     return (
