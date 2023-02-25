@@ -47,9 +47,9 @@ const CardTotal = () => {
 			</TouchableOpacity>
 			<View style={styles.cardTotal}>
 				<Text
-					style={{ color: 'white', fontSize: 18 }}
+					style={{ color: 'white', fontSize: 20, fontWeight: 'bold', letterSpacing: 0.5 }}
 				>
-					Ingreso Total
+					Total Disponible
 				</Text>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Text style={{ marginRight: 14, color: 'white', fontSize: 26, fontWeight: 'bold' }}>
@@ -81,14 +81,15 @@ const CardTotal = () => {
 									const Vector = VectorsComponents[item.logo]
 
 									return (
-									<View style={styles.cardList}>
+									<View style={styles.cardList} key={index}>
 										<View
 											style={{
 												display: 'flex',
 												flexDirection: 'row',
 												marginLeft: 10,
 												alignItems: 'center',
-												justifyContent: 'center'
+												justifyContent: 'center',
+												maxWidth: '70%'
 											}}
 										>
 											<View
@@ -113,7 +114,7 @@ const CardTotal = () => {
 
 											<View style={{ marginLeft: 15 }}>
 												<Text style={{ color: 'white', fontSize: 18, marginBottom: 5 }}>
-													{item.category[0].name}
+													{item.category[0].name.length > 17 ? item.category[0].name.substring(0, 16)+"..." : item.category[0].name}
 												</Text>
 												<Text style={{ color: 'white', fontSize: 16, marginBottom: 5 }}>
 													{item.description}
@@ -123,7 +124,7 @@ const CardTotal = () => {
 												</Text>
 											</View>
 										</View>
-										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold' }}>
+										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold', width: '30%', textAlign: 'right' }}>
 											 {`$ ${item.amount}`}
 										</Text>
 									</View>

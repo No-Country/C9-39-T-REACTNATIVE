@@ -24,7 +24,7 @@ const Signup = ({ navigation }) => {
 			// Validar datos
 			if (!name || !email || !password || !confirmPassword) {
 				Alert.alert('Error', 'Debes completar todos los campos', [
-					{text: 'Aceptar'},
+					{ text: 'Aceptar' },
 				]);
 				setLoading(false)
 				return
@@ -32,7 +32,7 @@ const Signup = ({ navigation }) => {
 
 			if (password !== confirmPassword) {
 				Alert.alert('Error', 'Las contraseñas no coinciden', [
-					{text: 'Aceptar'},
+					{ text: 'Aceptar' },
 				]);
 				setLoading(false)
 				return
@@ -45,28 +45,23 @@ const Signup = ({ navigation }) => {
 				"lastname": "Last"
 			})
 
-			// BORRAR LUEGO
-			console.log(data);
-
 			setLoading(false)
 			Alert.alert('Registrado!', 'Registro Correcto!', [
-				{text: 'Aceptar'},
+				{ text: 'Aceptar' },
 			]);
 			navigation.navigate("Signin");
 
 		} catch (error) {
-			console.log(error);
 			Alert.alert('Error', 'Hubo un error al registrarse', [
-				{text: 'Aceptar'},
+				{ text: 'Aceptar' },
 			]);
 			setLoading(false);
 		}
 	};
 
-	return <SafeAreaView style={{ flex: 1 }}>
-		<View style={styles.container}>
-			<ScrollView>
-
+	return <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+		<ScrollView>
+			<View style={styles.container}>
 				<KeyboardAvoidingView
 					style={styles.keyboardAvoidingView}
 					behavior={Platform.OS === "ios" ? "height" : undefined}
@@ -81,7 +76,9 @@ const Signup = ({ navigation }) => {
 						label="Nombre y Apellido"
 						value={name}
 						setValue={setName}
-						autoCapitalize="none" />
+						autoCapitalize="none"
+						placeholder="John Doe"
+					/>
 
 					<Input
 						id="email"
@@ -90,6 +87,7 @@ const Signup = ({ navigation }) => {
 						setValue={setEmail}
 						keyboardType="email-address"
 						autoCapitalize="none"
+						placeholder="john@gmail.com"
 					/>
 
 					<Input
@@ -101,6 +99,7 @@ const Signup = ({ navigation }) => {
 						iconPack={Feather}
 						value={password}
 						setValue={setPassword}
+						placeholder="********"
 					/>
 
 					<Input
@@ -112,6 +111,7 @@ const Signup = ({ navigation }) => {
 						iconPack={Feather}
 						value={confirmPassword}
 						setValue={setConfirmPassword}
+						placeholder="********"
 					/>
 
 					{
@@ -124,14 +124,14 @@ const Signup = ({ navigation }) => {
 
 					}
 
-					<View 
+					<View
 						style={{ ...styles.headerTitle, marginTop: 16 }}
 					>
 						<Text style={styles.goSignIn}>
 							Ya Tienes Cuenta?{" "}
-							<Text 
+							<Text
 								style={{ fontWeight: 'bold', color: colors.primary }}
-								onPress={() => navigation.navigate("Signin")} 
+								onPress={() => navigation.navigate("Signin")}
 							>
 								Iniciar
 							</Text>
@@ -140,8 +140,9 @@ const Signup = ({ navigation }) => {
 
 				</KeyboardAvoidingView>
 
-			</ScrollView>
-		</View>
+
+			</View>
+		</ScrollView>
 	</SafeAreaView>
 }
 
