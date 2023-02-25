@@ -49,7 +49,7 @@ const Expense = () => {
         'https://gringotts-henna.vercel.app/api/discharge'
       )
       const dataJson = await response.json()
-      
+
       setData(dataJson.data)
     } catch (error) {
       console.error(error)
@@ -62,7 +62,6 @@ const Expense = () => {
   return (
     <View style={styles.container}>
       {data.length ? <Expenses data={data} /> : <Empty />}
-      <TransparentButton title='Agregar' />
     </View>
   )
 }
@@ -132,7 +131,6 @@ const Empty = () => {
 }
 
 const Expenses = ({ data }) => {
-  
   return (
     <View
       style={{

@@ -12,4 +12,4 @@ Las tecnologías utilizadas para el front end son React Native, Axios, Async-Sto
 - Gilmar Fasabi Morales / Front end developer
 - Mauro Spinello Alemani / Back end developer
 - Santiago Andres Aguirre / Back end developer
-- Luiggi Mera / Teste QA
+- Luiggi Mera / Tester QA
