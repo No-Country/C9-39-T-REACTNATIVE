@@ -7,6 +7,17 @@ import { AuthContext } from '../../global/globalVar'
 import axios from 'axios'
 import { API } from '../../config'
 
+//terminar
+const ImgGasto = ({ item }) => {
+  const preImageRoute = item.title.toLowerCase()
+  const imgRoute = `../../assets/iconsGasto/conFondo/${preImageRoute}.svg`
+  return <Text>Image</Text>
+}
+
+// return <Image source =require(imgRoute)} />
+
+// <ImgGasto item={item} />
+
 const RenderItem = ({ item }) => (
   <View
     style={{
@@ -21,7 +32,7 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
-      <Text>Image</Text>
+      <ImgGasto item={item} />
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
