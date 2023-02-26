@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 
 import colors from '../../constants/colors'
-import TransparentButton from '../shared/TransparentButton'
+import { AuthContext } from '../../global/globalVar'
+import axios from 'axios'
+import { API } from '../../config'
 
 const RenderItem = ({ item }) => (
   <View
@@ -42,19 +44,22 @@ const RenderItem = ({ item }) => (
 )
 
 const Expense = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
+
+  const [auth, setAuth] = useContext(AuthContext);
+
   const RetrieveData = async () => {
     try {
-      const response = await fetch(
-        'https://gringotts-henna.vercel.app/api/discharge'
-      )
-      const dataJson = await response.json()
 
-      setData(dataJson.data)
+      const { data } = await axios.get(`${API}/discharge`)
+      const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
+
+      setData(filterData)
     } catch (error) {
       console.error(error)
     }
   }
+
   useEffect(() => {
     RetrieveData()
   }, [])

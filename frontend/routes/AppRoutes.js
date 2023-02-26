@@ -1,19 +1,13 @@
-import { Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Feather from 'react-native-vector-icons/Feather'
-import Entypo from 'react-native-vector-icons/Entypo'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Signup from '../screens/Signup'
 import Signin from '../screens/Signin'
 import HomeScreen from '../screens/HomeScreen'
-import Income from '../screens/Income'
 import ForgotPassword from '../screens/ForgotPassword'
 import VerifyEmailCode from '../screens/VerifyEmailCode'
 import ResetPassword from '../screens/ResetPassword'
-import colors from '../constants/colors'
-import { AuthContext, AuthProvider } from '../global/globalVar.js'
+import { AuthContext } from '../global/globalVar.js'
 
 // IMPORT WITHOUT {}
 //import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,7 +17,6 @@ import ScreenSecond from '../splashScreen/ScreenSecond'
 import ScreenThird from '../splashScreen/ScreenThird'
 
 const Stack = createNativeStackNavigator()
-const Tab = createBottomTabNavigator()
 
 export default function AppRoutes() {
   const [auth, setAuth] = useContext(AuthContext);

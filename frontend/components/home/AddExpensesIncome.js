@@ -19,21 +19,6 @@ const VectorsComponents = {
 	"Entypo": Entypo
 }
 
-/* const categoriasGastos = [
-	{
-		"id": "63e63d1c372fa3673743d73f",
-		"name": "Electrodomesticos",
-		"logo": 'devices-other',
-		"vector": "MaterialIcons"
-	},
-	{
-		"id": "63e63d1c372fa3673743d73f",
-		"name": "Otros",
-		"logo": 'shoppingcart',
-		"vector": "AntDesign"
-	},
-] */
-
 const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 	const [isExpense, setIsExpense] = useState(0);
 	const [buttonSelected, setButtonSelected] = useState(0)
@@ -62,11 +47,11 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 		getIncome()
 		getDischarge()
 	}, [])
-	
+
 	const getIncome = async () => {
 		const { data } = await axios.get(`${API}/category/income`)
 		setCategoriasIngresos(data.data)
-	} 
+	}
 
 	const getDischarge = async () => {
 		const { data } = await axios.get(`${API}/category/discharge`)
@@ -98,7 +83,7 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				logo: category.vector,
 				vector: category.logo
 			})
-			
+
 			setLoading(false)
 			Alert.alert('Listo!', isExpense ? 'Gasto Registrado.' : 'Ingreso Registrado.', [
 				{ text: 'Aceptar' },
@@ -118,7 +103,7 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 	}
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ flex: 1 }}>
 			<ScrollView>
 				<View style={{ marginVertical: 5 }}>
 					<TouchableOpacity
@@ -144,7 +129,7 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				>
 					{items.map((item, index) => (
 						<View
-							key={item}
+							key={index}
 						>
 							<TouchableOpacity onPress={() => setIsExpense(index)}>
 								<Text
@@ -209,19 +194,13 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 						showCategories && (
 							<View style={styles.categoryContainer}>
 								<FlatList
+									keyExtractor={item => item.id}
 									data={isExpense ? categoriasGastos : categoriasIngresos}
-									scrollEnabled={false}
 									renderItem={(itemData) => {
 										const Vector = VectorsComponents[itemData.item.vector]
 										return (
 											<TouchableOpacity key={itemData.item._id} onPress={() => selectCategory(itemData.item)}>
 												<View style={styles.cardCategory}>
-													{/* <FontAwesome
-														name={itemData.item.logo}
-														size={28}
-														color={colors.primary}
-														style={{ marginLeft: 10 }}
-													/> */}
 													<Vector
 														name={itemData.item.logo}
 														size={28}
@@ -236,14 +215,14 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 										)
 									}}
 								/>
-							</View>
+							</View> 
 						)
 					}
 
-					<Entrada 
-						bottons={bottons} 
-						buttonSelected={buttonSelected} 
-						isExpense={isExpense} 
+					<Entrada
+						bottons={bottons}
+						buttonSelected={buttonSelected}
+						isExpense={isExpense}
 						setButtonSelected={setButtonSelected}
 						checkRepeatDay={checkRepeatDay}
 						setCheckRepeatDay={setCheckRepeatDay}
@@ -271,9 +250,9 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 						value={description}
 					/>
 
-					<SubmitButton 
-						title={isExpense ? 'Agregar Gasto' : 'Agregar Ingreso'} 
-						onPress={submitExpenseIncome} 
+					<SubmitButton
+						title={isExpense ? 'Agregar Gasto' : 'Agregar Ingreso'}
+						onPress={submitExpenseIncome}
 						bgColor={isExpense && colors.redLight}
 					/>
 				</View>
@@ -301,6 +280,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	categoryContainer: {
+		flex: 1,
 		borderColor: colors.textLightGrey,
 		borderWidth: 3,
 		//maxHeight: 180,

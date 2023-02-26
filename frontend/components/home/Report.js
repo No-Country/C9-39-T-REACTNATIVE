@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons'
+import React, { useContext, useEffect, useState } from 'react'
+import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo, FontAwesome5 } from '@expo/vector-icons'
 
 import colors from '../../constants/colors'
 import axios from 'axios'
 import { API } from '../../config'
+import { AuthContext } from '../../global/globalVar'
 
 const VectorsComponents = {
 	"AntDesign": AntDesign,
@@ -19,6 +20,8 @@ const Report = () => {
 
 	const [loading, setLoading] = useState(false)
 
+	const [auth, setAuth] = useContext(AuthContext);
+
 	useEffect(async () => {
 		setLoading(true)
 
@@ -32,8 +35,7 @@ const Report = () => {
 
 	const getIncome = async () => {
 		const { data } = await axios.get(`${API}/income`)
-		// TODO: remplazar 63f3ed6d7e48ac052e3881ca por el id del usuario logueado
-		const filterData = data.data.reverse().filter(d => d.userId[0]._id == "63f3ed6d7e48ac052e3881ca")
+		const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
 
 		for (let i = 0; i < filterData.length; i++) {
 			var fecha = new Date(filterData[i].createAt);
@@ -51,8 +53,7 @@ const Report = () => {
 
 	const getDischarge = async () => {
 		const { data } = await axios.get(`${API}/discharge`)
-		// TODO: remplazar 63f3ed6d7e48ac052e3881ca por el id del usuario logueado
-		const filterData = data.data.reverse().filter(d => d.userId[0]._id == "63f3ed6d7e48ac052e3881ca")
+		const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
 
 		for (let i = 0; i < filterData.length; i++) {
 			var fecha = new Date(filterData[i].createAt);
@@ -71,91 +72,113 @@ const Report = () => {
 	return (
 		<View>
 			{
-				!loading ? Object.keys(formatData).map((key, index) => {
-					let total = 0
-					return (
-						<View style={styles.container} key={`rep-${index}`}>
-							{/* <Text>{key}</Text> */}
-							<Text style={{ marginTop: 5, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Ingresos</Text>
-							{
-								formatData[key]?.ingresos?.map((ingreso, index) => {
-									const Vector = VectorsComponents[ingreso.logo]
-									total = total + ingreso.amount
-									return (
-										<View style={styles.row} key={`i-${index}`}>
-											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-												<View
-													style={{
-														width: 45,
-														height: 45,
-														borderWidth: 1,
-														borderColor: 'white',
-														backgroundColor: 'white',
-														borderRadius: 50,
-														display: 'flex',
-														alignItems: 'center',
-														justifyContent: 'center'
-													}}
-												>
-													<Vector
-														name={ingreso.vector}
-														size={28}
-														color={colors.primary}
-													/>
+				!loading ?
+					Object.keys(formatData).length > 0 ?
+						Object.keys(formatData).map((key, index) => {
+							let total = 0
+							return (
+								<View style={styles.container} key={`rep-${index}`}>
+									{/* <Text>{key}</Text> */}
+									<Text style={{ marginTop: 5, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Ingresos</Text>
+									{
+										formatData[key]?.ingresos?.map((ingreso, index) => {
+											const Vector = VectorsComponents[ingreso.logo]
+											total = total + ingreso.amount
+											return (
+												<View style={styles.row} key={`i-${index}`}>
+													<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+														<View
+															style={{
+																width: 45,
+																height: 45,
+																borderWidth: 1,
+																borderColor: 'white',
+																backgroundColor: 'white',
+																borderRadius: 50,
+																display: 'flex',
+																alignItems: 'center',
+																justifyContent: 'center'
+															}}
+														>
+															<Vector
+																name={ingreso.vector}
+																size={28}
+																color={colors.primary}
+															/>
+														</View>
+														<Text style={{ fontSize: 16 }}>{ingreso.category[0].name}</Text>
+													</View>
+													<Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.primary }}>{ingreso.amount}</Text>
 												</View>
-												<Text style={{ fontSize: 16 }}>{ingreso.category[0].name}</Text>
-											</View>
-											<Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.primary }}>{ingreso.amount}</Text>
-										</View>
-									)
-								})
-							}
+											)
+										})
+									}
 
-							<Text style={{ marginTop: 10, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Gastos</Text>
-							{
-								formatData[key]?.gastos?.map((gasto, index) => {
-									const Vector = VectorsComponents[gasto.logo]
-									total = total - gasto.amount
-									return (
-										<View style={styles.row} key={`g-${index}`}>
-											<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-												<View
-													style={{
-														width: 45,
-														height: 45,
-														borderWidth: 1,
-														borderColor: 'white',
-														backgroundColor: 'white',
-														borderRadius: 50,
-														display: 'flex',
-														alignItems: 'center',
-														justifyContent: 'center'
-													}}
-												>
-													<Vector
-														name={gasto.vector}
-														size={28}
-														color={colors.redLight}
-													/>
+									<Text style={{ marginTop: 10, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Gastos</Text>
+									{
+										formatData[key]?.gastos?.map((gasto, index) => {
+											const Vector = VectorsComponents[gasto.logo]
+											total = total - gasto.amount
+											return (
+												<View style={styles.row} key={`g-${index}`}>
+													<View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+														<View
+															style={{
+																width: 45,
+																height: 45,
+																borderWidth: 1,
+																borderColor: 'white',
+																backgroundColor: 'white',
+																borderRadius: 50,
+																display: 'flex',
+																alignItems: 'center',
+																justifyContent: 'center'
+															}}
+														>
+															<Vector
+																name={gasto.vector}
+																size={28}
+																color={colors.redLight}
+															/>
+														</View>
+														<Text style={{ fontSize: 16 }}>{gasto.category[0].name}</Text>
+													</View>
+													<Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.secondary }}>- {gasto.amount}</Text>
 												</View>
-												<Text style={{ fontSize: 16 }}>{gasto.category[0].name}</Text>
-											</View>
-											<Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.secondary }}>- {gasto.amount}</Text>
-										</View>
-									)
-								})
-							}
-							<View style={{ ...styles.row, alignItems: 'center', marginTop: 10 }}>
-								<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 0.3 }}>Total</Text>
-								<Text style={{ fontSize: 18, fontWeight: 'bold' }}>{total}</Text>
+											)
+										})
+									}
+									<View style={{ ...styles.row, alignItems: 'center', marginTop: 10 }}>
+										<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 0.3 }}>Total</Text>
+										<Text style={{ fontSize: 18, fontWeight: 'bold' }}>{total}</Text>
+									</View>
+								</View>
+							)
+						}) : (
+							<View style={styles.containerEmpty}>
+								<View style={styles.circle}>
+									<FontAwesome5
+										name='hand-holding-usd'
+										size={30}
+										color={colors.primary}
+									/>
+								</View>
+
+								<Text
+									style={{
+										marginTop: 14,
+										color: colors.textGrey,
+										letterSpacing: 0.3,
+									}}
+								>
+									No hay informe para mostrar
+								</Text>
 							</View>
+						) : (
+						<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
+							<ActivityIndicator size={'large'} color={colors.primary} />
 						</View>
 					)
-				}) : (
-					<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
-						<ActivityIndicator size={'large'} color={colors.primary} />
-					</View>
-				)
 			}
 		</View>
 	)
@@ -175,7 +198,22 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingVertical: 5
-	}
+	},
+	containerEmpty: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginVertical: 20
+	},
+	circle: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 60,
+		width: 60,
+		backgroundColor: colors.primaryExtraLight,
+		borderRadius: 100,
+	},
 })
 
 export default Report

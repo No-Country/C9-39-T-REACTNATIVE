@@ -29,8 +29,7 @@ const CardTotal = () => {
 
 	const getIncome = async () => {
 		const { data } = await axios.get(`${API}/income`)
-		// TODO: remplazar 63f3ed6d7e48ac052e3881ca por el id del usuario logueado
-		const filterData = data.data.reverse().filter(d => d.userId[0]._id == "63f3ed6d7e48ac052e3881ca")
+		const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
 		
 		setIncomes(filterData)
 	}
@@ -53,7 +52,7 @@ const CardTotal = () => {
 				</Text>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Text style={{ marginRight: 14, color: 'white', fontSize: 26, fontWeight: 'bold' }}>
-						$ 1000.00
+						$ {auth.user.totalAmount}
 					</Text>
 					<TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
 						<AntDesign name="down" size={18} color="white" />

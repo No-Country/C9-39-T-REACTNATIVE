@@ -60,7 +60,7 @@ export const login = async (email: string, password: string) => {
         let userModel = Users
 
         let userFound = await userModel.findOne({ email: email })
-        const {firstname, lastname} = userFound
+        const {_id, firstname, lastname, totalAmount} = userFound
         
         if (!userFound) {
             return { message: 'User not found' }
@@ -77,9 +77,13 @@ export const login = async (email: string, password: string) => {
         let token = jwt.sign({ email: userFound.email }, `${secret}`, { expiresIn: "1d" })
 
         return {
-            firstname,
-            lastname,
-            email,
+            user: {
+                _id,
+                firstname,
+                lastname,
+                email,
+                totalAmount
+            },
             token: token,
             success: true,
         }

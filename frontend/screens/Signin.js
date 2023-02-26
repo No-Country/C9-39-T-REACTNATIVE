@@ -16,6 +16,7 @@ import Input from '../components/shared/Input'
 import Feather from "react-native-vector-icons/Feather";
 import SubmitButton from '../components/shared/SubmitButton'
 import colors from '../constants/colors';
+import { API } from '../config';
 
 const Signin = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState('')
@@ -37,7 +38,7 @@ const Signin = ({ navigation }) => {
 			}
 
       const { data } = await axios.post(
-        `https://gringotts-henna.vercel.app/api/auth/login`,
+        `${API}/auth/login`,
         {
           email,
           password,
@@ -53,8 +54,8 @@ const Signin = ({ navigation }) => {
         return
       }
 
-      setAuth(data);
-      await AsyncStorage.setItem("@auth", JSON.stringify(data));
+      setAuth({"token": data.token, "user": data.user});
+      await AsyncStorage.setItem("@auth", JSON.stringify({"token": data.token, "user": data.user}));
       navigation.navigate('Home')
     } catch (error) {
       setLoading(false);

@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
   const loadFromAsyncStorage = async () => {
     let data = await AsyncStorage.getItem("@auth");
     data = JSON.parse(data);
-    // console.log("loaded_from_async_storage", data);
+    
     setAuth({ ...auth, user: data.user, token: data.token });
   };
 
