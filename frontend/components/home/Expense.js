@@ -5,6 +5,8 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import colors from '../../constants/colors'
 import TransparentButton from '../shared/TransparentButton'
 
+// <ImgGasto item={item} />
+
 const RenderItem = ({ item }) => (
   <View
     style={{
