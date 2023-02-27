@@ -1,22 +1,42 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
+import Bus from '../../assets/iconsGasto/conFondo/bus.svg'
+import Carro from '../../assets/iconsGasto/conFondo/carro.svg'
+import Combustible from '../../assets/iconsGasto/conFondo/combustible.svg'
+import Comidas from '../../assets/iconsGasto/conFondo/comidas.svg'
+import Deuda from '../../assets/iconsGasto/conFondo/deuda.svg'
+import Factura from '../../assets/iconsGasto/conFondo/factura.svg'
+import Renta from '../../assets/iconsGasto/conFondo/renta.svg'
+import Servicio from '../../assets/iconsGasto/conFondo/servicio.svg'
 
 import colors from '../../constants/colors'
 import { AuthContext } from '../../global/globalVar'
 import axios from 'axios'
 import { API } from '../../config'
 
-//terminar
-const ImgGasto = ({ item }) => {
-  const preImageRoute = item.title.toLowerCase()
-  const imgRoute = `../../assets/iconsGasto/conFondo/${preImageRoute}.svg`
-  return <Text>Image</Text>
+const ImgGasto = ({ title }) => {
+  switch (title) {
+    case 'Bus':
+      return <Bus width={100} height={100} />
+    case 'Carro':
+      return <Carro width={100} height={100} />
+    case 'Combustible':
+      return <Combustible width={100} height={100} />
+    case 'Comidas':
+      return <Comidas width={100} height={100} />
+    case 'Deuda':
+      return <Deuda width={100} height={100} />
+    case 'Factura':
+      return <Factura width={100} height={100} />
+    case 'Renta':
+      return <Renta width={100} height={100} />
+    case 'Servicio':
+      return <Servicio width={100} height={100} />
+    default:
+      return <Text>{title} NOT FOUND</Text>
+  }
 }
-
-// return <Image source =require(imgRoute)} />
-
-// <ImgGasto item={item} />
 
 const RenderItem = ({ item }) => (
   <View
@@ -32,7 +52,7 @@ const RenderItem = ({ item }) => (
     }}
   >
     <View style={{ justifyContent: 'center' }}>
-      <ImgGasto item={item} />
+      <ImgGasto title={item.title} />
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>

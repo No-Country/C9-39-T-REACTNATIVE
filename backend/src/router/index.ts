@@ -4,6 +4,7 @@ import categoryRouter from './Category.routes'
 import dischargeRouter from './Discharge.routes'
 import filterRouter from './Filter.routes'
 import incomeRouter from './Income.routes'
+import staticsRouter from './Statics.routes'
 import userRouter from './User.routes'
 
 let server = express()
@@ -25,5 +26,7 @@ server.use('/income', incomeRouter)
 server.use('/category', categoryRouter)
 // Filter routes
 server.use('/filter', filterRouter)
+// Get statics
+server.use('/statics', staticsRouter)
 
 export default server
