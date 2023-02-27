@@ -5,6 +5,7 @@ import { updateUserById } from "./User.services"
 
 
 
+
 export const createIncome = async (income: any): Promise<any | undefined> => {
 
     try {
@@ -59,6 +60,7 @@ export const getIncomesByUser = async (id: string): Promise<any | undefined> => 
         return { success: false, message: 'Error to find incomes user' }
     }
 }
+
 
 export const updateIncomeById = async (id: string, data: any): Promise<any | undefined> => {
 
