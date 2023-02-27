@@ -15,7 +15,7 @@ export const createDischarge = async (discharge: any): Promise<any | undefined> 
         let totalAmount = user.totalAmount - discharge.amount
 
         // Update total amount of the user
-        await updateUserById(discharge.userId, {totalAmount})
+        await updateUserById(discharge.userId, { totalAmount })
 
         // Create a new discharge
         const created = await dischargeModel.create(discharge)
@@ -68,9 +68,9 @@ export const getDischargeByName = async (name: string, id: string): Promise<any 
         const discharges = await getDischargesByUser(id)
 
         //Filter the expenses that contain the word in the title or description
-        const filtered = discharges.data.filter((discharge: any ) => expName.test(discharge.title) || expName.test(discharge.description))
+        const filtered = discharges.data.filter((discharge: any) => expName.test(discharge.title) || expName.test(discharge.description))
 
-        return { success: true, filtered}
+        return { success: true, filtered }
     } catch (error) {
         console.log(error)
         return { success: false, error }
@@ -81,8 +81,10 @@ export const getDischargesByUser = async (id: string): Promise<any | undefined> 
 
     try {
         let dischargeModel = Discharge
-
-        let data = await dischargeModel.find({ userId: id }).populate('category')
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1;
+        
+        let data = await dischargeModel.find({ userId: id, createAt: { $gte: new Date(`${today.getFullYear()}-${currentMonth}-01`), $lte: today } }).populate('category', 'name -_id')
 
         return { success: true, data }
     } catch (error) {

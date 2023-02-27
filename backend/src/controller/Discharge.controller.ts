@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createDischarge, deleteDischargeById, getAllDischarges, getDischargeById, getDischargeByName, updateDischargeById } from "../services/Discharge.services";
+import { createDischarge, deleteDischargeById, getAllDischarges, getDischargeById, getDischargeByName, getDischargesByUser, updateDischargeById } from "../services/Discharge.services";
 
 
 export class DischargeController {
@@ -35,6 +35,15 @@ export class DischargeController {
         const {name, id} = req.body
 
         const data = await getDischargeByName(name, id)
+
+        res.status(data.succes ? 200 : 400).send(data)
+    }
+
+    //Get discharge by user
+    static async getDischargesByUser(req: Request, res: Response){
+        const {id} = req.body
+
+        const data = await getDischargesByUser(id)
 
         res.status(data.succes ? 200 : 400).send(data)
     }
