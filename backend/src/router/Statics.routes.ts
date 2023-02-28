@@ -9,6 +9,6 @@ const staticsRouter = Router()
 const jsonParser = bodyParser.json()
 
 // Get statics
-staticsRouter.get('/', jsonParser, StaticsController.getData)
+staticsRouter.get('/:id', jsonParser, StaticsController.getData)
 
 export default staticsRouter

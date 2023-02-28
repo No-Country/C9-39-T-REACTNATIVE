@@ -11,6 +11,8 @@ export const getUserStatics = async (id: string): Promise<any | undefined> => {
         const total = await updateTotalAmountByMonth(id)
         const expenses = await getDischargesByUser(id)
         const totalAmount = total.totalAmount
+        const incomesTotalAmount = total.incomesTotalAmount
+
         let categoryPercentages: any = {}
         
         const categories = expenses.data.reduce((acc: any, curr: any) => {
@@ -30,7 +32,7 @@ export const getUserStatics = async (id: string): Promise<any | undefined> => {
             categoryPercentages[cat] = percentage;
         }
         
-        return { categoryPercentages, totalAmount }
+        return { categoryPercentages, totalAmount, incomesTotalAmount }
     } catch (error) {
         console.log(error)
         return { success: false, message: 'Error to get discharges or incomes by ID' }

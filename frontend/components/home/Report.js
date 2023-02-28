@@ -36,7 +36,7 @@ const Report = () => {
 	const getIncome = async () => {
 		const { data } = await axios.get(`${API}/income`)
 		const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
-
+		
 		for (let i = 0; i < filterData.length; i++) {
 			var fecha = new Date(filterData[i].createAt);
 			var mes = `${fecha.getFullYear()}-${fecha.getMonth() + 1}`;
@@ -54,7 +54,7 @@ const Report = () => {
 	const getDischarge = async () => {
 		const { data } = await axios.get(`${API}/discharge`)
 		const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
-
+		
 		for (let i = 0; i < filterData.length; i++) {
 			var fecha = new Date(filterData[i].createAt);
 			var mes = `${fecha.getFullYear()}-${fecha.getMonth() + 1}`;
@@ -75,6 +75,7 @@ const Report = () => {
 				!loading ?
 					Object.keys(formatData).length > 0 ?
 						Object.keys(formatData).map((key, index) => {
+							
 							let total = 0
 							return (
 								<View style={styles.container} key={`rep-${index}`}>
@@ -82,7 +83,8 @@ const Report = () => {
 									<Text style={{ marginTop: 5, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Ingresos</Text>
 									{
 										formatData[key]?.ingresos?.map((ingreso, index) => {
-											const Vector = VectorsComponents[ingreso.logo]
+											
+											const Vector = VectorsComponents[ingreso.vector] ? VectorsComponents[ingreso.vector] : VectorsComponents['FontAwesome']
 											total = total + ingreso.amount
 											return (
 												<View style={styles.row} key={`i-${index}`}>
@@ -101,7 +103,7 @@ const Report = () => {
 															}}
 														>
 															<Vector
-																name={ingreso.vector}
+																name={ingreso.logo ? ingreso.logo : "bank"}
 																size={28}
 																color={colors.primary}
 															/>
@@ -117,7 +119,8 @@ const Report = () => {
 									<Text style={{ marginTop: 10, padding: 5, fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 }}>Gastos</Text>
 									{
 										formatData[key]?.gastos?.map((gasto, index) => {
-											const Vector = VectorsComponents[gasto.logo]
+											
+											const Vector = VectorsComponents[gasto.vector]
 											total = total - gasto.amount
 											return (
 												<View style={styles.row} key={`g-${index}`}>
@@ -136,7 +139,7 @@ const Report = () => {
 															}}
 														>
 															<Vector
-																name={gasto.vector}
+																name={gasto.logo}
 																size={28}
 																color={colors.redLight}
 															/>

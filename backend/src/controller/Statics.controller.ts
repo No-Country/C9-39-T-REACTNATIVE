@@ -6,8 +6,10 @@ export class StaticsController {
     constructor(){ /* TODO document why this constructor is empty */ }
 
     static async getData(req: Request, res: Response){
+        const {id} = req.params
+        console.log(id);
         
-        const {id} = req.body
+        //const {id} = req.body
 
         const statics = await getUserStatics(id)
 
