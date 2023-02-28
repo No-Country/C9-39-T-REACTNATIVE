@@ -8,20 +8,14 @@ import { AuthContext } from '../../global/globalVar'
 import axios from 'axios'
 import { API } from '../../config'
 
-const getData = [
-	{ x: 1, y: 70, label: "Disponible" },
-	{ x: 2, y: 15, label: "Comidas" },
-	{ x: 3, y: 15, label: "Otros" }
-]
-
 const Percent = () => {
-	let colorScales = [colors.primaryLight, "#F36257", "#53E6E7"]
+	let colorScales = [colors.primaryLight, "#F36257", "#53E6E7", "#DEDEE7", "#0F838E"]
 
 	const [dataPercent, setDataPercent] = useState([])
 	const [loading, setLoading] = useState(false)
 
 	const [auth, setAuth] = useContext(AuthContext);
-	console.log(auth);
+	
 	const { _id } = auth.user
 
 	useEffect(() => {
@@ -32,12 +26,12 @@ const Percent = () => {
 		setLoading(true)
 		let formatData = []
 		const { data } = await axios.get(`${API}/statics/${_id}`)
-
+		
 		formatData.push({
 			x: 1,
 			y: data.totalAmount / data.incomesTotalAmount * 100,
 			label: "Disponible"
-		})
+		}) 
 
 		Object.keys(data.categories).map((d, i) => {
 
@@ -51,13 +45,12 @@ const Percent = () => {
 		})
 
 		setDataPercent(formatData)
+
 		setLoading(false)
 	}
 
-	//console.log("state total",dataPercent[0].y);
-
 	return (
-		!loading ? dataPercent.length > 0 ? (
+		!loading ? dataPercent.length > 0 && dataPercent[0].y ? (
 			<View style={styles.container}>
 
 				<View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -85,17 +78,19 @@ const Percent = () => {
 				</View>
 			</View>
 		) : (
-			<View style={styles.porcent}>
-				<Text
-					style={{
-						justifyContent: 'center',
-						alignItems: 'center',
-						fontSize: 24,
-						fontWeight: 'bold'
-					}}
-				>
-					0%
-				</Text>
+			<View style={styles.container}>
+				<View style={styles.porcent}>
+					<Text
+						style={{
+							justifyContent: 'center',
+							alignItems: 'center',
+							fontSize: 24,
+							fontWeight: 'bold'
+						}}
+					>
+						0%
+					</Text>
+				</View>
 			</View>
 		) : (
 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
