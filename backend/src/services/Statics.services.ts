@@ -26,13 +26,13 @@ export const getUserStatics = async (id: string): Promise<any | undefined> => {
             return acc;
         }, {})
 
-        for (let cat in categories) {
+        /* for (let cat in categories) {
             const categoryAmount = categories[cat];
             const percentage = (categoryAmount / totalAmount) * 100;
             categoryPercentages[cat] = percentage;
-        }
+        } */
         
-        return { categoryPercentages, totalAmount, incomesTotalAmount }
+        return { categories, totalAmount, incomesTotalAmount }
     } catch (error) {
         console.log(error)
         return { success: false, message: 'Error to get discharges or incomes by ID' }

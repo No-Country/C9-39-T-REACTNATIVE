@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { VictoryPie } from 'victory-native'
 import { Svg } from 'react-native-svg'
@@ -32,40 +32,63 @@ const Percent = () => {
 		setLoading(true)
 		let formatData = []
 		const { data } = await axios.get(`${API}/statics/${_id}`)
-		
+
 		formatData.push({
 			x: 1,
-			y: data.totalAmount/data.incomesTotalAmount * 100,
+			y: data.totalAmount / data.incomesTotalAmount * 100,
 			label: "Disponible"
 		})
 
-		Object.keys(data.categoryPercentages).map((d, i) => {
-			const divTotal = data.categoryPercentages[d]/data.incomesTotalAmount
-			console.log(divTotal);
+		Object.keys(data.categories).map((d, i) => {
+
+			const divTotal = Math.round(data.categories[d]) / data.incomesTotalAmount
 			const obj = {
 				x: i + 2,
 				y: divTotal * 100,
 				label: d
 			}
 			formatData.push(obj)
-		}) 
-
-		console.log("result final ", formatData);
+		})
 
 		setDataPercent(formatData)
 		setLoading(false)
 	}
 
-	console.log("state ",dataPercent);
-	console.log("state total",dataPercent[0].y);
-
+	//console.log("state total",dataPercent[0].y);
 
 	return (
-		!loading && <View style={styles.container}>
-			{/* <View style={styles.porcent}>
-				<Text 
-					style={{ 
-						justifyContent: 'center', 
+		!loading ? dataPercent.length > 0 ? (
+			<View style={styles.container}>
+
+				<View style={{ alignItems: 'center', justifyContent: 'center' }}>
+					<Svg width={250} height={200} >
+
+						<VictoryPie
+							standalone={false} // Android workaround
+							data={dataPercent ? dataPercent : []}
+							radius={100} // circulo exterior
+							innerRadius={75} // diametro del circulo interior
+							labelRadius={80} // labels mover
+							style={{
+								labels: { fill: "transparent" },
+							}}
+							width={250}
+							height={200}
+							colorScale={colorScales}
+						/>
+					</Svg>
+					<View style={{ position: 'absolute', justifyContent: 'center' }}>
+						<Text style={{ fontSize: 25, textAlign: 'center', color: '#000' }}>
+							{dataPercent.length > 0 && Math.trunc(dataPercent[0].y)}
+						</Text>
+					</View>
+				</View>
+			</View>
+		) : (
+			<View style={styles.porcent}>
+				<Text
+					style={{
+						justifyContent: 'center',
 						alignItems: 'center',
 						fontSize: 24,
 						fontWeight: 'bold'
@@ -73,31 +96,12 @@ const Percent = () => {
 				>
 					0%
 				</Text>
-			</View> */}
-			<View style={{ alignItems: 'center', justifyContent: 'center' }}>
-				<Svg width={250} height={200} >
-
-					<VictoryPie
-						standalone={false} // Android workaround
-						data={dataPercent}
-						radius={100} // circulo exterior
-						innerRadius={75} // diametro del circulo interior
-						labelRadius={80} // labels mover
-						style={{
-							labels: { fill: "transparent" },
-						}}
-						width={250}
-						height={200}
-						colorScale={colorScales}
-					/>
-				</Svg>
-				<View style={{ position: 'absolute', justifyContent: 'center' }}>
-					<Text style={{ fontSize: 25, textAlign: 'center', color: '#000' }}>
-						{Math.trunc(dataPercent[0].y)}
-					</Text>
-				</View>
 			</View>
-		</View>
+		) : (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
+				<ActivityIndicator size={'large'} color={colors.primary} />
+			</View>
+		)
 	)
 }
 

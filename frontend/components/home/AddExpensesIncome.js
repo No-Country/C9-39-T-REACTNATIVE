@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Dimensions, StyleSheet, TextInput, FlatList, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AntDesign, FontAwesome, MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
 
 import colors from '../../constants/colors';
@@ -7,6 +7,7 @@ import SubmitButton from '../shared/SubmitButton';
 import axios from 'axios';
 import { API } from '../../config';
 import Entrada from './expenseIncome/Entrada';
+import { AuthContext } from '../../global/globalVar';
 
 const items = ["Ingreso", "Gasto"];
 const bottons = ["Diario", "Semanal", "Mensual"];
@@ -37,6 +38,8 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 
 	const [categoriasGastos, setCategoriasGastos] = useState([])
 	const [categoriasIngresos, setCategoriasIngresos] = useState([])
+
+	const [auth, setAuth] = useContext(AuthContext);
 
 	const selectCategory = (item) => {
 		setShowCategories(false)
@@ -77,7 +80,7 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				title: category.name,
 				description,
 				amount: monto,
-				userId: "63f3ed6d7e48ac052e3881ca",
+				userId: auth.user._id,
 				category: category._id,
 
 				logo: category.vector,

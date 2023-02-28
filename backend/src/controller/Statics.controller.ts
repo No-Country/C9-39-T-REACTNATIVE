@@ -7,7 +7,6 @@ export class StaticsController {
 
     static async getData(req: Request, res: Response){
         const {id} = req.params
-        console.log(id);
         
         //const {id} = req.body
 

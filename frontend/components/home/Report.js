@@ -84,7 +84,7 @@ const Report = () => {
 									{
 										formatData[key]?.ingresos?.map((ingreso, index) => {
 											
-											const Vector = VectorsComponents[ingreso.vector] ? VectorsComponents[ingreso.vector] : VectorsComponents['FontAwesome']
+											const Vector = VectorsComponents[ingreso.logo] ? VectorsComponents[ingreso.logo] : VectorsComponents['FontAwesome']
 											total = total + ingreso.amount
 											return (
 												<View style={styles.row} key={`i-${index}`}>
@@ -103,7 +103,7 @@ const Report = () => {
 															}}
 														>
 															<Vector
-																name={ingreso.logo ? ingreso.logo : "bank"}
+																name={ingreso.logo ? ingreso.vector : "bank"}
 																size={28}
 																color={colors.primary}
 															/>
@@ -120,7 +120,7 @@ const Report = () => {
 									{
 										formatData[key]?.gastos?.map((gasto, index) => {
 											
-											const Vector = VectorsComponents[gasto.vector]
+											const Vector = VectorsComponents[gasto.logo]
 											total = total - gasto.amount
 											return (
 												<View style={styles.row} key={`g-${index}`}>
@@ -139,7 +139,7 @@ const Report = () => {
 															}}
 														>
 															<Vector
-																name={gasto.logo}
+																name={gasto.vector}
 																size={28}
 																color={colors.redLight}
 															/>

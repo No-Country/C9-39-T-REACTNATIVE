@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Signup from '../screens/Signup'
 import Signin from '../screens/Signin'
 import HomeScreen from '../screens/HomeScreen'
@@ -10,7 +10,7 @@ import ResetPassword from '../screens/ResetPassword'
 import { AuthContext } from '../global/globalVar.js'
 
 // IMPORT WITHOUT {}
-//import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 //imports components splash screen
 import ScreenFirst from '../splashScreen/ScreenFirst'
 import ScreenSecond from '../splashScreen/ScreenSecond'
@@ -21,11 +21,15 @@ const Stack = createNativeStackNavigator()
 export default function AppRoutes() {
   const [auth, setAuth] = useContext(AuthContext);
   const authenticated = auth?.token !== "" && auth?.user !== null;
-
+  
   /* const logout = async () => {
     setAuth({ user: null, token: "" });
     await AsyncStorage.removeItem("@auth");
   }; */
+
+  /* useEffect(async() => {
+    await AsyncStorage.removeItem("@auth");
+  }, []) */
 
   return (
     <NavigationContainer>
