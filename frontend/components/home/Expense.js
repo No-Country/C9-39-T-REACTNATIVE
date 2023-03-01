@@ -38,18 +38,6 @@ const ImgGasto = ({ title }) => {
   }
 }
 
-/*
-const dateString = "2023-02-23T15:35:59.000Z";
-const date = new Date(dateString);
-
-const day = date.getDate().toString().padStart(2, "0");
-const month = (date.getMonth() + 1).toString().padStart(2, "0");
-const year = date.getFullYear().toString();
-
-const formattedDate = `${day}-${month}-${year}`;
-console.log(formattedDate); // outputs "23-02-2023"
-*/
-
 const Time = ({ preTime }) => {
   const date = new Date(preTime)
 
@@ -57,7 +45,7 @@ const Time = ({ preTime }) => {
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const year = date.getFullYear().toString()
   const formattedDate = `${day}-${month}-${year}`
-  return <Text>formattedDate</Text>
+  return <Text>{formattedDate}</Text>
 }
 
 const RenderItem = ({ item }) => (
