@@ -10,7 +10,7 @@ import ResetPassword from '../screens/ResetPassword'
 import { AuthContext } from '../global/globalVar.js'
 
 // IMPORT WITHOUT {}
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 //imports components splash screen
 import ScreenFirst from '../splashScreen/ScreenFirst'
 import ScreenSecond from '../splashScreen/ScreenSecond'
@@ -19,17 +19,8 @@ import ScreenThird from '../splashScreen/ScreenThird'
 const Stack = createNativeStackNavigator()
 
 export default function AppRoutes() {
-  const [auth, setAuth] = useContext(AuthContext);
-  const authenticated = auth?.token !== "" && auth?.user !== null;
-  
-  /* const logout = async () => {
-    setAuth({ user: null, token: "" });
-    await AsyncStorage.removeItem("@auth");
-  }; */
-
-  /* useEffect(async() => {
-    await AsyncStorage.removeItem("@auth");
-  }, []) */
+  const [auth] = useContext(AuthContext)
+  const authenticated = auth?.token !== '' && auth?.user !== null
 
   return (
     <NavigationContainer>

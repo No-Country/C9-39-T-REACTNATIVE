@@ -39,6 +39,16 @@ const ImgGasto = ({ title }) => {
   }
 }
 
+const Time = ({ preTime }) => {
+  const date = new Date(preTime)
+
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const year = date.getFullYear().toString()
+  const formattedDate = `${day}-${month}-${year}`
+  return <Text>{formattedDate}</Text>
+}
+
 const RenderItem = ({ item }) => (
   <View
     style={{
@@ -58,12 +68,13 @@ const RenderItem = ({ item }) => (
       </View>
       <View style={{ justifyContent: 'center' }}>
         <Text style={{ fontWeight: 'bold' }}>
-          {item.title}  
+          {item.title}
         </Text>
         <Text>
-          {item.description.length > 15 ? item.description.substring(0, 15)+"..." : item.description} 
+          {item.description.length > 15 ? item.description.substring(0, 15) + "..." : item.description}
         </Text>
-        <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text>
+        {/* <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text> */}
+        <Time preTime={item.createAt} />
       </View>
     </View>
     <View style={{ justifyContent: 'center' }}>
@@ -85,14 +96,16 @@ const Expense = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext)
 
   const RetrieveData = async () => {
     try {
       setLoading(true)
 
       const { data } = await axios.get(`${API}/discharge`)
-      const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
+      const filterData = data.data
+        .reverse()
+        .filter((d) => d.userId[0]._id == `${auth.user._id}`)
 
       setData(filterData)
       setLoading(false)
