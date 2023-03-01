@@ -39,8 +39,6 @@ const CardTotal = () => {
 		await AsyncStorage.removeItem("@auth");
 	};
 
-	console.log(incomes);
-
 	return (
 		<View style={styles.containerCardTotal}>
 			<TouchableOpacity style={{ position: 'absolute', top: 15, right: 15 }} onPress={logout}>
@@ -54,7 +52,7 @@ const CardTotal = () => {
 				</Text>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Text style={{ marginRight: 14, color: 'white', fontSize: 26, fontWeight: 'bold' }}>
-						$ {auth.user.totalAmount}
+						$ {auth?.user?.totalAmount}
 					</Text>
 					<TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
 						<AntDesign name="down" size={18} color="white" />
@@ -125,8 +123,8 @@ const CardTotal = () => {
 												</Text>
 											</View>
 										</View>
-										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold', width: '30%', textAlign: 'right' }}>
-											 {`$ ${item.amount}`}
+										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold', maxWidth: '30%', textAlign: 'right' }}>
+											 {`$${item.amount}`}
 										</Text>
 									</View>
 								)}
@@ -139,11 +137,7 @@ const CardTotal = () => {
 				)
 			}
 
-
-
 		</View>
-
-
 	)
 }
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 import Bus from '../../assets/iconsGasto/conFondo/bus.svg'
@@ -14,25 +14,26 @@ import colors from '../../constants/colors'
 import { AuthContext } from '../../global/globalVar'
 import axios from 'axios'
 import { API } from '../../config'
+import moment from 'moment'
 
 const ImgGasto = ({ title }) => {
   switch (title) {
     case 'Bus':
-      return <Bus width={100} height={100} />
+      return <Bus width={50} height={50} />
     case 'Carro':
-      return <Carro width={100} height={100} />
+      return <Carro width={50} height={50} />
     case 'Combustible':
-      return <Combustible width={100} height={100} />
+      return <Combustible width={50} height={50} />
     case 'Comidas':
-      return <Comidas width={100} height={100} />
+      return <Comidas width={50} height={50} />
     case 'Deuda':
-      return <Deuda width={100} height={100} />
+      return <Deuda width={50} height={50} />
     case 'Factura':
-      return <Factura width={100} height={100} />
+      return <Factura width={50} height={50} />
     case 'Renta':
-      return <Renta width={100} height={100} />
+      return <Renta width={50} height={50} />
     case 'Servicio':
-      return <Servicio width={100} height={100} />
+      return <Servicio width={50} height={50} />
     default:
       return <Text>{title} NOT FOUND</Text>
   }
@@ -48,16 +49,22 @@ const RenderItem = ({ item }) => (
       padding: 10,
       marginBottom: 15,
       flexDirection: 'row',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-between',
     }}
   >
-    <View style={{ justifyContent: 'center' }}>
-      <ImgGasto title={item.title} />
-    </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
-      <Text>{item.description}</Text>
-      <Text style={{ color: 'gray' }}>{item.createAt}</Text>
+    <View style={{ flexDirection: 'row' }}>
+      <View style={{ justifyContent: 'center', marginRight: 10 }}>
+        <ImgGasto title={item.title} />
+      </View>
+      <View style={{ justifyContent: 'center' }}>
+        <Text style={{ fontWeight: 'bold' }}>
+          {item.title}  
+        </Text>
+        <Text>
+          {item.description.length > 15 ? item.description.substring(0, 15)+"..." : item.description} 
+        </Text>
+        <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text>
+      </View>
     </View>
     <View style={{ justifyContent: 'center' }}>
       <Text
@@ -68,7 +75,7 @@ const RenderItem = ({ item }) => (
           color: colors.primary,
         }}
       >
-        - $ {item.amount}
+        -${item.amount}
       </Text>
     </View>
   </View>
@@ -76,16 +83,19 @@ const RenderItem = ({ item }) => (
 
 const Expense = () => {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const [auth, setAuth] = useContext(AuthContext);
 
   const RetrieveData = async () => {
     try {
+      setLoading(true)
 
       const { data } = await axios.get(`${API}/discharge`)
       const filterData = data.data.reverse().filter(d => d.userId[0]._id == `${auth.user._id}`)
 
       setData(filterData)
+      setLoading(false)
     } catch (error) {
       console.error(error)
     }
@@ -97,7 +107,13 @@ const Expense = () => {
 
   return (
     <View style={styles.container}>
-      {data.length ? <Expenses data={data} /> : <Empty />}
+      {
+        !loading ? data.length ? <Expenses data={data} /> : <Empty />
+          :
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
+            <ActivityIndicator size={'large'} color={colors.primary} />
+          </View>
+      }
     </View>
   )
 }

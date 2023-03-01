@@ -92,10 +92,12 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				{ text: 'Aceptar' },
 			]);
 
+			// TODO: Actualizar el monto en auth state global
+
 			setMonto(0)
 			setCategory(null)
 			setDescription('')
-
+			
 		} catch (error) {
 			console.log(error);
 			Alert.alert('Error', `Hubo un error al guardar ${isExpense ? 'Gasto.' : 'Ingreso.'}`, [
