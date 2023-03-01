@@ -39,8 +39,6 @@ const CardTotal = () => {
 		await AsyncStorage.removeItem("@auth");
 	};
 
-	console.log(incomes);
-
 	return (
 		<View style={styles.containerCardTotal}>
 			<TouchableOpacity style={{ position: 'absolute', top: 15, right: 15 }} onPress={logout}>
