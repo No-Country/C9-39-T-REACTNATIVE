@@ -87,7 +87,7 @@ const RenderItem = ({ item }) => (
 const Expense = () => {
   const [data, setData] = useState([])
 
-  const [auth, setAuth] = useContext(AuthContext)
+  const [auth] = useContext(AuthContext)
 
   const RetrieveData = async () => {
     try {
