@@ -1,20 +1,26 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { AntDesign, FontAwesome, Ionicons, MaterialIcons, Entypo } from '@expo/vector-icons'
-import moment from "moment";
+import {
+  AntDesign,
+  FontAwesome,
+  Ionicons,
+  MaterialIcons,
+  Entypo,
+} from '@expo/vector-icons'
+import moment from 'moment'
 
 import colors from '../../constants/colors'
 import axios from 'axios'
 import { API } from '../../config'
-import { AuthContext } from '../../global/globalVar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../../global/globalVar'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const VectorsComponents = {
-	"AntDesign": AntDesign,
-	"FontAwesome": FontAwesome,
-	"Ionicons": Ionicons,
-	"MaterialIcons": MaterialIcons,
-	"Entypo": Entypo
+  AntDesign: AntDesign,
+  FontAwesome: FontAwesome,
+  Ionicons: Ionicons,
+  MaterialIcons: MaterialIcons,
+  Entypo: Entypo,
 }
 
 const CardTotal = () => {
@@ -52,7 +58,7 @@ const CardTotal = () => {
 				</Text>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Text style={{ marginRight: 14, color: 'white', fontSize: 26, fontWeight: 'bold' }}>
-						$ {auth.user.totalAmount}
+						$ {auth?.user?.totalAmount}
 					</Text>
 					<TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
 						<AntDesign name="down" size={18} color="white" />
@@ -123,8 +129,8 @@ const CardTotal = () => {
 												</Text>
 											</View>
 										</View>
-										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold', width: '30%', textAlign: 'right' }}>
-											 {`$ ${item.amount}`}
+										<Text style={{ marginRight: 10, fontSize: 20, color: 'white', fontWeight: 'bold', maxWidth: '30%', textAlign: 'right' }}>
+											 {`$${item.amount}`}
 										</Text>
 									</View>
 								)}
@@ -137,40 +143,36 @@ const CardTotal = () => {
 				)
 			}
 
-
-
 		</View>
-
-
 	)
 }
 
 const styles = StyleSheet.create({
-	containerCardTotal: {
-		width: '100%',
-		backgroundColor: colors.primary,
-		borderRadius: 10,
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	cardTotal: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: 120,
-	},
-	cardList: {
-		width: '90%',
-		paddingVertical: 10,
-		borderWidth: 2,
-		borderColor: 'white',
-		marginVertical: 15,
-		borderRadius: 10,
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-	}
+  containerCardTotal: {
+    width: '100%',
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardTotal: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 120,
+  },
+  cardList: {
+    width: '90%',
+    paddingVertical: 10,
+    borderWidth: 2,
+    borderColor: 'white',
+    marginVertical: 15,
+    borderRadius: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 })
 
 export default CardTotal

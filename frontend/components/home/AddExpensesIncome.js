@@ -1,23 +1,40 @@
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Dimensions, StyleSheet, TextInput, FlatList, Alert } from 'react-native'
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  Alert,
+} from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { AntDesign, FontAwesome, MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import {
+  AntDesign,
+  FontAwesome,
+  MaterialIcons,
+  Ionicons,
+  Entypo,
+} from '@expo/vector-icons'
 
-import colors from '../../constants/colors';
-import SubmitButton from '../shared/SubmitButton';
-import axios from 'axios';
-import { API } from '../../config';
-import Entrada from './expenseIncome/Entrada';
-import { AuthContext } from '../../global/globalVar';
+import colors from '../../constants/colors'
+import SubmitButton from '../shared/SubmitButton'
+import axios from 'axios'
+import { API } from '../../config'
+import Entrada from './expenseIncome/Entrada'
+import { AuthContext } from '../../global/globalVar'
 
-const items = ["Ingreso", "Gasto"];
-const bottons = ["Diario", "Semanal", "Mensual"];
+const items = ['Ingreso', 'Gasto']
+const bottons = ['Diario', 'Semanal', 'Mensual']
 
 const VectorsComponents = {
-	"AntDesign": AntDesign,
-	"FontAwesome": FontAwesome,
-	"Ionicons": Ionicons,
-	"MaterialIcons": MaterialIcons,
-	"Entypo": Entypo
+  AntDesign: AntDesign,
+  FontAwesome: FontAwesome,
+  Ionicons: Ionicons,
+  MaterialIcons: MaterialIcons,
+  Entypo: Entypo,
 }
 
 const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
@@ -92,10 +109,12 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				{ text: 'Aceptar' },
 			]);
 
+			// TODO: Actualizar el monto en auth state global
+
 			setMonto(0)
 			setCategory(null)
 			setDescription('')
-
+			
 		} catch (error) {
 			console.log(error);
 			Alert.alert('Error', `Hubo un error al guardar ${isExpense ? 'Gasto.' : 'Ingreso.'}`, [
@@ -266,37 +285,37 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 }
 
 const styles = StyleSheet.create({
-	row: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		paddingHorizontal: 10,
-		paddingVertical: 5
-	},
-	inputContainer: {
-		width: '100%',
-		paddingHorizontal: 10,
-		paddingVertical: 12,
-		borderRadius: 12,
-		flexDirection: 'row',
-		alignItems: 'center',
-		borderWidth: 1,
-		marginBottom: 10,
-	},
-	categoryContainer: {
-		flex: 1,
-		borderColor: colors.textLightGrey,
-		borderWidth: 3,
-		//maxHeight: 180,
-		borderRadius: 12,
-		marginTop: -8,
-	},
-	cardCategory: {
-		display: 'flex',
-		flexDirection: 'row',
-		padding: 12,
-		borderBottomColor: colors.textLightGrey,
-		borderBottomWidth: 2,
-	}
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  inputContainer: {
+    width: '100%',
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+    borderRadius: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    marginBottom: 10,
+  },
+  categoryContainer: {
+    flex: 1,
+    borderColor: colors.textLightGrey,
+    borderWidth: 3,
+    //maxHeight: 180,
+    borderRadius: 12,
+    marginTop: -8,
+  },
+  cardCategory: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: 12,
+    borderBottomColor: colors.textLightGrey,
+    borderBottomWidth: 2,
+  },
 })
 
 export default AddExpensesIncome

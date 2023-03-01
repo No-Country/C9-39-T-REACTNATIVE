@@ -1,24 +1,25 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import { AuthProvider } from './global/globalVar'
 import AppRoutes from './routes/AppRoutes'
-import SplashScreen from './splashScreen/SplashScreen'
+import { View,StyleSheet } from "react-native";
+import Constants from 'expo-constants'
 
 export default function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <View
+      style={styles.container}
+      >
+        <AppRoutes />
+      </View>
     </AuthProvider>
-
-    // <SplashScreen/>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+    marginTop: Constants.statusBarHeight
+
+  }
+});
