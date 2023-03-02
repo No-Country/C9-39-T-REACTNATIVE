@@ -33,22 +33,16 @@ const VectorsComponents = {
 
 const ImgGasto = ({ title }) => {
   switch (title) {
-    case 'Bus':
-      return <Bus width={50} height={50} />
-    case 'Carro':
-      return <Carro width={50} height={50} />
-    case 'Combustible':
-      return <Combustible width={50} height={50} />
+    case 'Impuestos o Servicios':
+      return <Impuestos width={50} height={50} />
     case 'Comidas':
       return <Comidas width={50} height={50} />
-    case 'Deuda':
-      return <Deuda width={50} height={50} />
-    case 'Factura':
-      return <Factura width={50} height={50} />
-    case 'Renta':
-      return <Renta width={50} height={50} />
-    case 'Servicio':
-      return <Servicio width={50} height={50} />
+    case 'Diversion':
+      return <Diversion width={50} height={50} />
+    case 'Electrodomesticos':
+      return <Electrodomesticos width={50} height={50} />
+    case 'Otros':
+      return <Otros width={50} height={50} />
     default:
       return <Text>{title} NOT FOUND</Text>
   }
@@ -89,11 +83,11 @@ const RenderItem = ({ item }) => {
           />
         </View>
         <View style={{ justifyContent: 'center' }}>
-          <Text style={{ fontWeight: 'bold' }}>
-            {item.title}
-          </Text>
+          <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
           <Text>
-            {item.description.length > 20 ? item.description.substring(0, 20) + "..." : item.description}
+            {item.description.length > 20
+              ? item.description.substring(0, 20) + '...'
+              : item.description}
           </Text>
           {/* <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text> */}
           <Time preTime={item.createAt} />
@@ -143,13 +137,25 @@ const Expense = () => {
 
   return (
     <View style={styles.container}>
-      {
-        !loading ? data.length ? <Expenses data={data} /> : <Empty />
-          :
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%', height: 150 }}>
-            <ActivityIndicator size={'large'} color={colors.primary} />
-          </View>
-      }
+      {!loading ? (
+        data.length ? (
+          <Expenses data={data} />
+        ) : (
+          <Empty />
+        )
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: 150,
+          }}
+        >
+          <ActivityIndicator size={'large'} color={colors.primary} />
+        </View>
+      )}
     </View>
   )
 }
