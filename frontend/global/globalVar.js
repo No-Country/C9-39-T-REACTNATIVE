@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
       if (error.response.status === 401 || error.response.status === 403) {
         await AsyncStorage.removeItem("@auth");
         setAuth({ user: null, token: "" });
-        alert("Session expired. Please login.");
+        alert("Sesion expirada. inicie sesion nuevamente.");
       }
       return Promise.reject(error);
     }

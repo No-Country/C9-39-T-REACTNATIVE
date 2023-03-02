@@ -103,13 +103,16 @@ const AddExpensesIncome = ({ addExpensesIncome, setAddExpensesIncome }) => {
 				logo: category.vector,
 				vector: category.logo
 			})
-
+			
 			setLoading(false)
 			Alert.alert('Listo!', isExpense ? 'Gasto Registrado.' : 'Ingreso Registrado.', [
 				{ text: 'Aceptar' },
 			]);
 
-			// TODO: Actualizar el monto en auth state global
+			isExpense ? 
+				auth.user.totalAmount = auth.user.totalAmount - monto :
+				auth.user.totalAmount = Number(auth.user.totalAmount) + Number(monto) 
+			setAuth(auth);
 
 			setMonto(0)
 			setCategory(null)

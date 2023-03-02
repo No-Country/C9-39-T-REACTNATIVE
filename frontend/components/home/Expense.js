@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { FontAwesome5 } from '@expo/vector-icons'
 import Bus from '../../assets/iconsGasto/conFondo/bus.svg'
 import Carro from '../../assets/iconsGasto/conFondo/carro.svg'
 import Combustible from '../../assets/iconsGasto/conFondo/combustible.svg'
@@ -15,6 +14,22 @@ import { AuthContext } from '../../global/globalVar'
 import axios from 'axios'
 import { API } from '../../config'
 import moment from 'moment'
+import {
+  AntDesign,
+  FontAwesome,
+  Ionicons,
+  MaterialIcons,
+  Entypo,
+  FontAwesome5,
+} from '@expo/vector-icons'
+
+const VectorsComponents = {
+  AntDesign: AntDesign,
+  FontAwesome: FontAwesome,
+  Ionicons: Ionicons,
+  MaterialIcons: MaterialIcons,
+  Entypo: Entypo,
+}
 
 const ImgGasto = ({ title }) => {
   switch (title) {
@@ -49,48 +64,56 @@ const Time = ({ preTime }) => {
   return <Text>{formattedDate}</Text>
 }
 
-const RenderItem = ({ item }) => (
-  <View
-    style={{
-      padding: 16,
-      borderColor: 'lightgray',
-      borderRadius: 10,
-      borderWidth: 2,
-      padding: 10,
-      marginBottom: 15,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    }}
-  >
-    <View style={{ flexDirection: 'row' }}>
-      <View style={{ justifyContent: 'center', marginRight: 10 }}>
-        <ImgGasto title={item.title} />
+const RenderItem = ({ item }) => {
+  const Vector = VectorsComponents[item.category[0].vector]
+  return (
+    <View
+      style={{
+        padding: 16,
+        borderColor: 'lightgray',
+        borderRadius: 10,
+        borderWidth: 2,
+        padding: 10,
+        marginBottom: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ justifyContent: 'center', marginRight: 10 }}>
+          {/* <ImgGasto title={item.title} /> */}
+          <Vector
+            name={item.category[0].logo}
+            size={38}
+            color={colors.redLight}
+          />
+        </View>
+        <View style={{ justifyContent: 'center' }}>
+          <Text style={{ fontWeight: 'bold' }}>
+            {item.title}
+          </Text>
+          <Text>
+            {item.description.length > 20 ? item.description.substring(0, 20) + "..." : item.description}
+          </Text>
+          {/* <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text> */}
+          <Time preTime={item.createAt} />
+        </View>
       </View>
       <View style={{ justifyContent: 'center' }}>
-        <Text style={{ fontWeight: 'bold' }}>
-          {item.title}
+        <Text
+          style={{
+            fontSize: 22,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            color: colors.primary,
+          }}
+        >
+          -${item.amount}
         </Text>
-        <Text>
-          {item.description.length > 15 ? item.description.substring(0, 15) + "..." : item.description}
-        </Text>
-        {/* <Text style={{ color: 'gray' }}>{moment(item.createAt).format("DD-MM-YYYY")}</Text> */}
-        <Time preTime={item.createAt} />
       </View>
     </View>
-    <View style={{ justifyContent: 'center' }}>
-      <Text
-        style={{
-          fontSize: 22,
-          display: 'flex',
-          justifyContent: 'flex-end',
-          color: colors.primary,
-        }}
-      >
-        -${item.amount}
-      </Text>
-    </View>
-  </View>
-)
+  )
+}
 
 const Expense = () => {
   const [data, setData] = useState([])

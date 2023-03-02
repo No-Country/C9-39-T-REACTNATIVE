@@ -58,7 +58,7 @@ const CardTotal = () => {
 				</Text>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Text style={{ marginRight: 14, color: 'white', fontSize: 26, fontWeight: 'bold' }}>
-						$ {auth?.user?.totalAmount}
+						${auth?.user?.totalAmount}
 					</Text>
 					<TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
 						<AntDesign name="down" size={18} color="white" />
